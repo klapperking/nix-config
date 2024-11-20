@@ -14,7 +14,8 @@
 
   # TODO: move dev-related packages into a dev-module and include for users
   home.packages = with pkgs; [
-    _1password
+    _1password-cli
+    age
     bc
     # darwin.xcode # TODO: Install xcode apple devtools
     direnv
@@ -30,7 +31,6 @@
     kitty
     meslo-lgs-nf
     nixfmt-rfc-style
-    nowplaying-cli
     rectangle
     ripgrep
     tmux
@@ -274,11 +274,8 @@
 
     git = {
       enable = true;
-
-      # TODO: move to nix-sops
-      extraConfig = {
-        credential.helper = "${pkgs.git.override { withLibsecret = true; }}/bin-git-credential-libsecret";
-      };
+      userName = "Martin Klapper";
+      userEmail = "64156820+klapperking@users.noreply.github.com";
     };
 
     gh = {
@@ -358,12 +355,6 @@
       enable = true;
       enableZshIntegration = true;
     };
-
-    # TODO: find or make thunderbird overlay; disable badSystem flag
-    # thunderbird = {
-    #   enable = true;
-    #   profiles = { };
-    # };
 
     tmux = {
       enable = true;
@@ -740,24 +731,48 @@
         export YSU_MESSAGE_POSITION="after"
       '';
 
-      # TODO: Use omz plugins (mostly aliases) or just install omz
-      plugins = with pkgs; [
-        {
-          name = "zsh-powerlevel10k";
-          src = "${zsh-powerlevel10k}/share/zsh-powerlevel10k/";
-          file = "powerlevel10k.zsh-theme";
-        }
-        {
-          name = "zsh-you-should-use";
-          src = fetchFromGitHub {
-            owner = "MichaelAquilina";
-            repo = "zsh-you-should-use";
-            rev = "1.9.0";
-            sha256 = "sha256-+3iAmWXSsc4OhFZqAMTwOL7AAHBp5ZtGGtvqCnEOYc0=";
+      plugins =
+        with pkgs;
+        let
+          omzPlugins = fetchFromGitHub {
+            owner = "ohmyzsh";
+            repo = "ohmyzsh";
+            rev = "master";
+            sha256 = "sha256-rI673tQ3W4U9N5i8LZx9dpKzft7+Y0UZ7iTSJwnoSSE=";
           };
-          file = "you-should-use.plugin.zsh";
-        }
-      ];
+        in
+        [
+          {
+            name = "zsh-powerlevel10k";
+            src = "${zsh-powerlevel10k}/share/zsh-powerlevel10k/";
+            file = "powerlevel10k.zsh-theme";
+          }
+          {
+            name = "zsh-you-should-use";
+            src = fetchFromGitHub {
+              owner = "MichaelAquilina";
+              repo = "zsh-you-should-use";
+              rev = "1.9.0";
+              sha256 = "sha256-+3iAmWXSsc4OhFZqAMTwOL7AAHBp5ZtGGtvqCnEOYc0=";
+            };
+            file = "you-should-use.plugin.zsh";
+          }
+          {
+            name = "git";
+            src = "${omzPlugins}/plugins/git";
+            file = "git.plugin.zsh";
+          }
+          {
+            name = "common-aliases";
+            src = "${omzPlugins}/plugins/common-aliases";
+            file = "common-aliases.plugin.zsh";
+          }
+          # TODO: Direnv
+          # TODO: 1password
+          # TODO: fzf ?
+          # TODO: gcloud
+          # TODO: gh
+        ];
 
       syntaxHighlighting.enable = true;
       shellAliases = {
