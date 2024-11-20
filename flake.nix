@@ -12,19 +12,19 @@
     nur.url = "github:nix-community/NUR";
     sops-nix.url = "github:Mic92/sops-nix";
 
-    # nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-    # homebrew-bundle = {
-    #   url = "github:homebrew/homebrew-bundle";
-    #   flake = false;
-    # };
-    # homebrew-core = {
-    #   url = "github:homebrew/homebrew-core";
-    #   flake = false;
-    # };
-    # homebrew-cask = {
-    #   url = "github:homebrew/homebrew-cask";
-    #   flake = false;
-    # };
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
   };
 
   outputs =
@@ -33,7 +33,7 @@
       home-manager,
       darwin,
       mac-app-util,
-      # nix-homebrew,
+      nix-homebrew,
       ...
     }:
     {
@@ -43,22 +43,22 @@
           system = "aarch64-darwin";
           modules = [
             ./darwin/system/configuration.nix
-            # nix-homebrew.darwinModules.nix-homebrew
-            # {
-            #   nix-homebrew = {
-            #     enable = true;
-            #     enableRosetta = true;
-            #     user = "martin";
-            #     taps = with inputs; {
-            #       "homebrew/homebrew-bundle" = homebrew-bundle;
-            #       "homebrew/homebrew-core" = homebrew-core;
-            #       "homebrew/homebrew-cask" = homebrew-cask;
-            #     };
-            #     mutableTaps = false;
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = true;
+                user = "martin";
+                taps = with inputs; {
+                  "homebrew/homebrew-bundle" = homebrew-bundle;
+                  "homebrew/homebrew-core" = homebrew-core;
+                  "homebrew/homebrew-cask" = homebrew-cask;
+                };
+                mutableTaps = false;
 
-            #     # autoMigrate = true;
-            #   };
-            # }
+                # autoMigrate = true;
+              };
+            }
             home-manager.darwinModules.home-manager
             {
               nixpkgs.overlays = [

@@ -18,8 +18,6 @@
     age
     bc
     # darwin.xcode # TODO: Install xcode apple devtools
-    direnv
-    devenv
     docker_26
     firefox-devedition-bin # firefox broken on darwin, use from overlay
     fzf
@@ -27,7 +25,6 @@
     git
     gh-eco
     gnupg
-    hasura-cli
     kitty
     meslo-lgs-nf
     nixfmt-rfc-style
@@ -214,6 +211,10 @@
                       {
                         name = "type";
                         value = "packages";
+                      }
+                      {
+                        name = "channel";
+                        value = "unstable";
                       }
                       {
                         name = "query";
@@ -727,8 +728,10 @@
       # p10k config
       # you should use position after the commands output
       initExtra = ''
+        # extra config (before aliases)
         source ~/.p10k.zsh
         export YSU_MESSAGE_POSITION="after"
+        unalias rm # unalias rm -i from common-aliases
       '';
 
       plugins =
@@ -777,8 +780,9 @@
       syntaxHighlighting.enable = true;
       shellAliases = {
         myip = "curl https://ipinfo.io/json";
-        # update-nix-config = "darwin-rebuild switch"
         speedtest = "curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"; # TODO uses system python
+
+        pn = "pnpm";
       };
       # TODO: History options
     };
