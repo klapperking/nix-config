@@ -110,8 +110,8 @@
         ApplePressAndHoldEnabled = false;
         AppleShowAllExtensions = true;
         AppleTemperatureUnit = "Celsius";
-        InitialKeyRepeat = 5; # TODO: Play around with this
-        KeyRepeat = 2;
+        InitialKeyRepeat = 15;
+        KeyRepeat = 6;
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticDashSubstitutionEnabled = false;
         NSAutomaticWindowAnimationsEnabled = false;
