@@ -25,6 +25,7 @@
     git
     gh-eco
     gnupg
+    google-chrome
     kitty
     meslo-lgs-nf
     nixfmt-rfc-style
@@ -52,6 +53,11 @@
 
     bash = {
       enable = true;
+    };
+
+    chromium = {
+      enable = true;
+      package = pkgs.google-chrome; # TODO: darwin chromium overlay!
     };
 
     direnv = {
