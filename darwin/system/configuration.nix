@@ -1,10 +1,7 @@
 { pkgs, config, ... }:
 
-# TODO: All system settings - hide dock etc.
-
 # TODO: Setup postgres
 # TODO: Overwrite default system ssh ?
-# TODO: lang version mgmt and system provided dfeaults from unstable?
 {
   # symlink system packages to home manager zsh for completion access
   environment.pathsToLink = [ "/share/zsh/" ];
@@ -41,6 +38,16 @@
   };
 
   nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.substituters = [
+    # default nixos cace
+    "https://cache.nixos.org/"
+    # devenv cache
+    "https://devenv.cachix.org"
+  ];
+  nix.settings.trusted-public-keys = [
+    # devenv cache
+    "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+  ];
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -57,10 +64,12 @@
   services.nix-daemon.enable = true;
 
   system = {
-    # rosetta to run x86 on silicon
-    activationScripts.extraActivation.text = ''
-      softwareupdate --install-rosetta --agree-to-license
-    '';
+    activationScripts = {
+      # rosetta to run x86 on silicon
+      extraActivation.text = ''
+        softwareupdate --install-rosetta --agree-to-license
+      '';
+    };
 
     defaults = {
       ActivityMonitor.IconType = 5;

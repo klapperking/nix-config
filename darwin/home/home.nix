@@ -1,11 +1,8 @@
 # TODO: Modularize this stuff
 { pkgs, ... }@inputs:
-# TODO: Move package extensions somehwere else
 {
-
   # TODO: scroll-reverser
   # TODO: run some stuff on startup?
-  # TODO: Setup example devenv for testing
 
   home.stateVersion = "24.05";
 
@@ -29,6 +26,9 @@
     kitty
     meslo-lgs-nf
     nixfmt-rfc-style
+    # TODO: figure out how to write to /etc/pam.d/sudo to make this work
+    # see https://github.com/LnL7/nix-darwin/issues/985 for workaround or fix
+    # pam-reattach
     pinentry-tty
     rectangle
     ripgrep
@@ -250,7 +250,7 @@
             };
           };
 
-          # TODO: Persist extension configs separately?
+          # TODO: Persist extension configs separately
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
             bitwarden
             canvasblocker
@@ -737,7 +737,7 @@
         "tailwindCSS.experimental.classRegex" = [
           [
             "cva\\(([^)]*)\\)"
-            "[\"'`]([^\"'`]*).*?[\"'`"
+            "[\"'`]([^\"'`]*).*?[\"'`]"
           ]
           [
             "cx\\(([^)]*)\\)"
@@ -813,6 +813,7 @@
       plugins =
         with pkgs;
         let
+          # Using lots of plugins from omz: https://github.com/ohmyzsh/ohmyzsh
           omzPlugins = fetchFromGitHub {
             owner = "ohmyzsh";
             repo = "ohmyzsh";
@@ -836,27 +837,40 @@
             };
             file = "you-should-use.plugin.zsh";
           }
+          # Omz plugins
+          {
+            name = "directories";
+            src = "${omzPlugins}/lib";
+            file = "directories.zsh";
+          }
           {
             name = "git";
             src = "${omzPlugins}/plugins/git";
             file = "git.plugin.zsh";
           }
           {
+            name = "git-commit";
+            src = "${omzPlugins}/plugins/git-commit";
+            file = "git-commit.plugin.zsh";
+          }
+          {
             name = "common-aliases";
             src = "${omzPlugins}/plugins/common-aliases";
             file = "common-aliases.plugin.zsh";
           }
-          # TODO: Direnv
-          # TODO: 1password
-          # TODO: fzf ?
-          # TODO: gcloud
-          # TODO: gh
+          {
+            name = "gh";
+            src = "${omzPlugins}/plugins/gh";
+            file = "gh.plugin.zsh";
+          }
+          # TODO: tmuxinator
         ];
 
       syntaxHighlighting.enable = true;
       shellAliases = {
         myip = "curl https://ipinfo.io/json";
-        speedtest = "curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"; # TODO uses system python
+        # TODO uses system python
+        speedtest = "curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -";
 
         pn = "pnpm";
       };
