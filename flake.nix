@@ -43,6 +43,7 @@
           system = "aarch64-darwin";
           modules = [
             ./darwin/system/configuration.nix
+            mac-app-util.darwinModules.default
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
@@ -55,15 +56,13 @@
                   "homebrew/homebrew-cask" = homebrew-cask;
                 };
                 mutableTaps = false;
-
-                # autoMigrate = true;
               };
             }
             home-manager.darwinModules.home-manager
             {
               nixpkgs.overlays = [
                 inputs.nixpkgs-firefox-darwin.overlay
-                inputs.nur.overlay
+                inputs.nur.overlays.default
               ];
               home-manager.sharedModules = [
                 mac-app-util.homeManagerModules.default

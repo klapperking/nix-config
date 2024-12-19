@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 
-# TODO: Setup postgres
+# TODO: Setup system postgres
 # TODO: Overwrite default system ssh ?
 {
   # symlink system packages to home manager zsh for completion access
@@ -21,8 +21,10 @@
     casks = [
       "1password"
       "aircall"
+      "bitwarden"
       "figma"
       "orbstack"
+      "docker"
       "slack"
       "spotify"
       "thunderbird"
@@ -73,7 +75,6 @@
 
     defaults = {
       ActivityMonitor.IconType = 5;
-      # cpu usage icon
       controlcenter = {
         BatteryShowPercentage = true;
       };
@@ -120,7 +121,7 @@
         AppleShowAllExtensions = true;
         AppleTemperatureUnit = "Celsius";
         InitialKeyRepeat = 15;
-        KeyRepeat = 6;
+        KeyRepeat = 2;
         NSAutomaticCapitalizationEnabled = false;
         NSAutomaticDashSubstitutionEnabled = false;
         NSAutomaticWindowAnimationsEnabled = false;

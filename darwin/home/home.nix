@@ -1,9 +1,6 @@
-# TODO: Modularize this stuff
+# TODO: Modularize
 { pkgs, ... }@inputs:
 {
-  # TODO: scroll-reverser
-  # TODO: run some stuff on startup?
-
   home.stateVersion = "24.05";
 
   home.username = "martin";
@@ -17,6 +14,7 @@
     # darwin.xcode # TODO: Install xcode apple devtools
     docker_26
     firefox-devedition-bin # firefox broken on darwin, use from overlay
+    # TODO: get a signed version or sign so 1password integration works
     fzf
     jq
     git
@@ -27,11 +25,13 @@
     meslo-lgs-nf
     nixfmt-rfc-style
     # TODO: figure out how to write to /etc/pam.d/sudo to make this work
+    # for tmux reattach-to-user-namespace
     # see https://github.com/LnL7/nix-darwin/issues/985 for workaround or fix
     # pam-reattach
     pinentry-tty
     rectangle
     ripgrep
+    shellcheck
     tmux
     tmuxPlugins.cpu
     tmuxPlugins.prefix-highlight
@@ -46,6 +46,8 @@
   home.sessionVariables = {
     TERMINAL = "kitty";
     EDITOR = "codium";
+    # use fake omz cache dir for completions
+    ZSH_CACHE_DIR = "${inputs.config.home.homeDirectory}/.cache/oh-my-zsh";
   };
 
   programs = {
@@ -99,11 +101,11 @@
             "browser.search.widget.inNavBar" = true;
 
             "browser.shell.checkDefaultBrowser" = false;
-            "browser.search.defaultenginename" = "DuckDuckGo";
-            "browser.search.order.1" = "DuckDuckGo";
-            "browser.startup.homepage" = "https://duckduckgo.com";
+            "browser.search.defaultenginename" = "Kagi Search";
+            "browser.search.order.1" = "Kagi Search";
+            "browser.startup.homepage" = "https://kagi.com";
             "browser.tabs.loadInBackground" = true;
-            "browser.urlbar.placeholderName" = "DuckDuckGo";
+            "browser.urlbar.placeholderName" = "Kagi";
             "browser.urlbar.showSearchSuggestionsFirst" = false;
 
             "browser.urlbar.quickactions.enabled" = false;
@@ -204,12 +206,24 @@
 
           search = {
             force = true;
-            default = "DuckDuckGo";
+            default = "Kagi Search";
             order = [
+              "Kagi Search"
               "DuckDuckGo"
               "Google"
             ];
             engines = {
+              "Kagi Search" = {
+                urls = [
+                  {
+                    # TODO: Use kagi session token when sops is set up
+                    # TODO: Aliases for lenses
+                    template = "https://kagi.com/search?q={searchTerms}";
+                  }
+                ];
+                icon = "https://assets.kagi.com/v2/favicon-32x32.png";
+                definedAliases = [ "@ks" ];
+              };
               "Nix Packages" = {
                 urls = [
                   {
@@ -245,6 +259,13 @@
                 updateInterval = 24 * 60 * 60 * 1000;
                 definedAliases = [ "@nc" ];
               };
+              "Nixhub.io" = {
+                urls = [ { template = "https://nixhub.io/search?q={searchTerms}"; } ];
+                iconUpdateURL = "https://www.nixhub.io/favicon.ico";
+                updateInterval = 24 * 60 * 60 * 1000;
+                definedAliases = [ "@nh" ];
+              };
+              "DuckDuckGo".metaData.alis = "@d";
               "Bing".metaData.hidden = true;
               "Google".metaData.alias = "@g";
             };
@@ -352,7 +373,7 @@
         signByDefault = true;
       };
       userName = "Martin Klapper";
-      userEmail = "64156820+klapperking@users.noreply.github.com";
+      userEmail = "martin@ax.tech";
     };
 
     gh = {
@@ -455,14 +476,13 @@
       '';
       clock24 = true;
       mouse = true;
-      newSession = true;
       plugins = with pkgs; [
-        {
-          plugin = tmuxPlugins.cpu;
-          extraConfig = ''
-            set -g status-right '#{cpu_bg_color} CPU: #{cpu_icon} #{cpu_percentage} | %a %h-%d %H:%M '
-          '';
-        }
+        # {
+        #   plugin = tmuxPlugins.cpu;
+        #   extraConfig = ''
+        #     set -g status-right '#{cpu_bg_color} CPU: #{cpu_icon} #{cpu_percentage} | %a %h-%d %H:%M '
+        #   '';
+        # }
         {
           plugin = tmuxPlugins.tokyo-night-tmux;
           extraConfig = ''
@@ -471,10 +491,10 @@
           '';
         }
         tmuxPlugins.yank
-
       ];
       shell = "${pkgs.zsh}/bin/zsh";
       terminal = "screen-256color";
+      tmuxinator.enable = true;
     };
 
     vscode = with pkgs; {
@@ -554,62 +574,68 @@
           {
             name = "playwright";
             publisher = "ms-playwright";
-            version = "1.1.11";
-            sha256 = "sha256-PNWeq8NZTrtHI53DOiJXvIMsbKrz433OrYwbggiFa30=";
+            version = "latest";
+            sha256 = "sha256-B6RYsDp1UKZmBRT/GdTPqxGOyCz2wJYKAqYqSLsez+w=";
           }
           {
             name = "code-spell-checker-british-english";
             publisher = "streetsidesoftware";
-            version = "1.4.11";
-            sha256 = "sha256-n9PjKJVmSAnhtnc6e7Rh/rKs/rssbcL+yLGTRC1lizg=";
+            version = "latest";
+            sha256 = "sha256-S1lGUMENNjMHUnNmgG4FihK0fFtDfluTKJ3v9tyiGJ4=";
           }
           {
             name = "code-spell-checker-german";
             publisher = "streetsidesoftware";
-            version = "2.3.2";
+            version = "latest";
             sha256 = "sha256-40Oc6ycNog9cxG4G5gCps2ADrM/wLuKWFrD4lnd91Z4=";
           }
           {
             name = "vscode-todo-highlight";
             publisher = "wayou";
-            version = "1.0.5";
+            version = "latest";
             sha256 = "sha256-CQVtMdt/fZcNIbH/KybJixnLqCsz5iF1U0k+GfL65Ok=";
           }
           {
             name = "tokyo-night-moon";
             publisher = "patricknasralla";
-            version = "1.1.4";
+            version = "latest";
             sha256 = "sha256-8rUbsDCk7JHSN4vn+TNTmIrx8ma53hH/1x0trqDwU7Y=";
           }
           {
             name = "vscode-css-peek";
             publisher = "pranaygp";
-            version = "4.4.1";
+            version = "latest";
             sha256 = "sha256-GX6J9DfIW9CLarSCfWhJQ9vvfUxy8QU0kh3cfRUZIaE=";
           }
           {
             name = "cucumberautocomplete";
             publisher = "alexkrechik";
-            version = "3.0.5";
+            version = "latest";
             sha256 = "sha256-Tgqd4uoVgGJQKlj4JUM1CrjQhbi0qv9bAGz5NIHyofQ=";
           }
           {
             name = "language-gettext";
             publisher = "mrorz";
-            version = "0.5.0";
+            version = "latest";
             sha256 = "sha256-1hdT2Fai0o48ojNqsjW+McokD9Nzt2By3vzhGUtgaeA=";
           }
           {
             name = "vscode-typescript-next";
             publisher = "ms-vscode";
-            version = "5.7.20241101";
-            sha256 = "sha256-8NqtTWD0zm1V4YIowUXUhdvI3xzpYKk4ictEtlsy3Mk=";
+            version = "latest";
+            sha256 = "sha256-ZYJ2+d7xZVMpsFilUxNPx52AiBPAP3GYfhzcyersqhc=";
           }
           {
             name = "react-proptypes-intellisense";
             publisher = "ofhumanbondage";
-            version = "1.0.3";
+            version = "latest";
             sha256 = "sha256-lmAjqOR+rznx5Q7W/ChRg8sb1NhqN2YtrwRn8zHYtRo=";
+          }
+          {
+            name = "shellcheck";
+            publisher = "timonwong";
+            version = "latest";
+            sha256 = "sha256-JSS0GY76+C5xmkQ0PNjt2Nu/uTUkfiUqmPL51r64tl0=";
           }
         ];
 
@@ -863,13 +889,22 @@
             src = "${omzPlugins}/plugins/gh";
             file = "gh.plugin.zsh";
           }
-          # TODO: tmuxinator
+          {
+            name = "docker";
+            src = "${omzPlugins}/plugins/docker";
+            file = "docker.plugin.zsh";
+          }
+          {
+            name = "docker-compose";
+            src = "${omzPlugins}/plugins/docker-compose";
+            file = "docker-compose.plugin.zsh";
+          }
         ];
 
       syntaxHighlighting.enable = true;
       shellAliases = {
         myip = "curl https://ipinfo.io/json";
-        # TODO uses system python
+        # TODO: don't use system python
         speedtest = "curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -";
 
         pn = "pnpm";
