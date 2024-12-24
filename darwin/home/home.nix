@@ -441,7 +441,7 @@
       font = {
         name = "MesloLGS NF";
         package = meslo-lgs-nf;
-        size = 13;
+        size = 12;
       };
       settings = {
         hide_window_decorations = true;
@@ -774,6 +774,7 @@
         # Window settings
         "window.restoreWindows" = "none";
         "window.newWindowDimensions" = "maximized";
+        "window.zoomLevel" = -1;
 
         # Workbench settings
         "workbench.editor.enablePreview" = true;
