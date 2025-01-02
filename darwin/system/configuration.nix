@@ -1,4 +1,8 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  ...
+}:
 
 # TODO: Setup system postgres
 # TODO: Overwrite default system ssh ?

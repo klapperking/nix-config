@@ -1,5 +1,8 @@
-# TODO: Modularize
-{ pkgs, ... }@inputs:
+{
+  pkgs,
+  config,
+  ...
+}@inputs:
 {
   home.stateVersion = "24.05";
 
@@ -21,7 +24,7 @@
     gh-eco
     gnupg
     google-chrome
-    kitty
+    kitty # TODO: use unstable once not broken anymore
     meslo-lgs-nf
     nixfmt-rfc-style
     # TODO: figure out how to write to /etc/pam.d/sudo to make this work
@@ -33,8 +36,6 @@
     ripgrep
     shellcheck
     tmux
-    tmuxPlugins.cpu
-    tmuxPlugins.prefix-highlight
     tmuxPlugins.tokyo-night-tmux
     tmuxPlugins.yank
     obsidian
@@ -47,7 +48,7 @@
     TERMINAL = "kitty";
     EDITOR = "codium";
     # use fake omz cache dir for completions
-    ZSH_CACHE_DIR = "${inputs.config.home.homeDirectory}/.cache/oh-my-zsh";
+    ZSH_CACHE_DIR = "${config.home.homeDirectory}/.cache/oh-my-zsh";
   };
 
   programs = {
@@ -555,7 +556,6 @@
           # git / github
           eamodio.gitlens
 
-          github.copilot
           github.vscode-github-actions
           github.vscode-pull-request-github
 
@@ -623,7 +623,7 @@
             name = "vscode-typescript-next";
             publisher = "ms-vscode";
             version = "latest";
-            sha256 = "sha256-ZYJ2+d7xZVMpsFilUxNPx52AiBPAP3GYfhzcyersqhc=";
+            sha256 = "sha256-KKD3Oh930aQeVpW3hxB4kE7bm9m+2/Z7BhKwH1W8wA8=";
           }
           {
             name = "react-proptypes-intellisense";
@@ -636,6 +636,12 @@
             publisher = "timonwong";
             version = "latest";
             sha256 = "sha256-JSS0GY76+C5xmkQ0PNjt2Nu/uTUkfiUqmPL51r64tl0=";
+          }
+          {
+            name = "vscode-expo-tools";
+            publisher = "expo";
+            version = "latest";
+            sha256 = "sha256-g1/+6Y9s2yyxjbfLn1e0hN6wMsHVGXDJeUopvld8KOc=";
           }
         ];
 
@@ -805,7 +811,6 @@
         "githubPullRequests.pullBranch" = "never";
         "go.toolsManagement.autoUpdate" = true;
         "git.openRepositoryInParentFolders" = "always";
-        "github.copilot.editor.enableAutoCompletions" = true;
 
         # Terminal settings
         "terminal.external.osxExec" = "kitty.app";
