@@ -6,6 +6,9 @@
 {
   home.stateVersion = "24.05";
 
+  # TODO: yabai window manager
+  # TODO: Sops
+
   home.username = "martin";
   home.homeDirectory = "/Users/martin";
 
@@ -762,7 +765,7 @@
         # Python settings
         "python.analysis.typeCheckingMode" = "basic";
         "python.analysis.autoImportCompletions" = true;
-        "python.languageServer" = "Pylance";
+        "python.languageServer" = "Jedi";
         "python.terminal.activateEnvironment" = false;
 
         # Tailwind CSS settings

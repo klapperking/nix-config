@@ -26,6 +26,7 @@
       "1password"
       "aircall"
       "bitwarden"
+      "linear-linear"
       "figma"
       "orbstack"
       "docker"
