@@ -2,8 +2,8 @@
   description = "5head config";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable"; # 24.11
-    # TODO: Enable unstable nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable-2411.url = "github:NixOS/nixpkgs/release-24.11";
 
     nixpkgs-firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
 
@@ -40,6 +40,7 @@
   outputs =
     inputs@{
       nixpkgs,
+      nixpkgs-stable-2411,
       home-manager,
       darwin,
       mac-app-util,
@@ -49,8 +50,15 @@
     {
       formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-rfc-style;
       darwinConfigurations = {
-        pro = darwin.lib.darwinSystem {
+        pro = darwin.lib.darwinSystem rec {
           system = "aarch64-darwin";
+          specialArgs = {
+            pkgs-stable = import nixpkgs-stable-2411 {
+              inherit system;
+              # TODO: Move this to configuration.nix?
+              config.allowUnfree = true;
+            };
+          };
           modules = [
             ./darwin/system/configuration.nix
             mac-app-util.darwinModules.default
@@ -60,10 +68,11 @@
                 enable = true;
                 enableRosetta = true;
                 user = "martin";
+                autoMigrate = true;
                 taps = with inputs; {
-                  "homebrew/homebrew-bundle" = homebrew-bundle;
-                  "homebrew/homebrew-core" = homebrew-core;
-                  "homebrew/homebrew-cask" = homebrew-cask;
+                  "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
+                  "homebrew/homebrew-core" = inputs.homebrew-core;
+                  "homebrew/homebrew-cask" = inputs.homebrew-cask;
                 };
                 mutableTaps = false;
               };
@@ -74,6 +83,7 @@
                 inputs.nixpkgs-firefox-darwin.overlay
                 inputs.nur.overlays.default
               ];
+              home-manager.extraSpecialArgs = { inherit (specialArgs) pkgs-stable; };
               home-manager.sharedModules = [
                 mac-app-util.homeManagerModules.default
                 inputs.sops-nix.homeManagerModules.sops

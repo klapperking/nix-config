@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-stable,
   config,
   ...
 }@inputs:
@@ -41,7 +42,7 @@
     tmux
     tmuxPlugins.tokyo-night-tmux
     tmuxPlugins.yank
-    obsidian
+    # obsidian
     vscodium
     zsh
     zsh-powerlevel10k
@@ -276,24 +277,26 @@
           };
 
           # TODO: Persist extension configs separately
-          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-            bitwarden
-            canvasblocker
-            darkreader
-            decentraleyes
-            onepassword-password-manager
-            privacy-badger
-            react-devtools
-            reduxdevtools
-            tokyo-night-v2
-            ublock-origin
-            user-agent-string-switcher
-            unpaywall
-            to-deepl
-            link-cleaner
-            # epub-reader
-            # gql network inspector
-          ];
+          extensions = {
+            packages = with pkgs.nur.repos.rycee.firefox-addons; [
+              bitwarden
+              canvasblocker
+              darkreader
+              decentraleyes
+              onepassword-password-manager
+              privacy-badger
+              react-devtools
+              reduxdevtools
+              tokyo-night-v2
+              ublock-origin
+              user-agent-string-switcher
+              unpaywall
+              to-deepl
+              link-cleaner
+              # epub-reader
+              # gql network inspector
+            ];
+          };
         };
       };
     };
@@ -377,7 +380,15 @@
         signByDefault = true;
       };
       userName = "Martin Klapper";
-      userEmail = "martin@ax.tech";
+      userEmail = "64156820+klapperking@users.noreply.github.com";
+
+      includes = [
+        {
+          path = "~/code/ax/.gitconfig";
+          condition = "gitdir:~/code/ax/";
+        }
+      ];
+
     };
 
     gh = {
@@ -445,7 +456,7 @@
       font = {
         name = "MesloLGS NF";
         package = meslo-lgs-nf;
-        size = 12;
+        size = 11;
       };
       settings = {
         hide_window_decorations = true;
@@ -481,12 +492,6 @@
       clock24 = true;
       mouse = true;
       plugins = with pkgs; [
-        # {
-        #   plugin = tmuxPlugins.cpu;
-        #   extraConfig = ''
-        #     set -g status-right '#{cpu_bg_color} CPU: #{cpu_icon} #{cpu_percentage} | %a %h-%d %H:%M '
-        #   '';
-        # }
         {
           plugin = tmuxPlugins.tokyo-night-tmux;
           extraConfig = ''
@@ -501,6 +506,7 @@
       tmuxinator.enable = true;
     };
 
+    # TODO: Don't search for updates.
     vscode = with pkgs; {
       enable = true;
       package = vscodium;
@@ -508,326 +514,350 @@
       # TODO: Fix the extension change conflicts when mutable dir is enabled
       mutableExtensionsDir = false;
 
-      # TODO: and/or move to extensions module in e.g. /home/vscode
-      extensions =
-        with pkgs.vscode-extensions;
-        with pkgs.vscode-utils;
-        [
-          # nix
-          bbenoist.nix
-          brettm12345.nixfmt-vscode
+      profiles = {
+        default = {
+          # can only be set here but applies to all profiles
+          enableUpdateCheck = false;
+          enableExtensionUpdateCheck = false;
 
-          # md
-          yzhang.markdown-all-in-one
-          unifiedjs.vscode-mdx
+          # TODO: and/or move to extensions module in e.g. /home/vscode
+          extensions =
+            with pkgs.vscode-extensions;
+            with pkgs.vscode-utils;
+            [
+              # nix
+              bbenoist.nix
+              brettm12345.nixfmt-vscode
 
-          # yaml
-          redhat.vscode-yaml
+              # md
+              yzhang.markdown-all-in-one
+              unifiedjs.vscode-mdx
 
-          # python
-          ms-python.python
-          ms-python.vscode-pylance
-          charliermarsh.ruff
+              # yaml
+              redhat.vscode-yaml
 
-          batisteo.vscode-django
+              # python
+              # ms-python.python
+              ms-python.vscode-pylance
+              charliermarsh.ruff
 
-          # golang
-          golang.go
+              batisteo.vscode-django
 
-          # rust
-          rust-lang.rust-analyzer
+              # golang
+              golang.go
 
-          # gql
-          graphql.vscode-graphql
-          graphql.vscode-graphql-syntax
+              # rust
+              rust-lang.rust-analyzer
 
-          # js/ts
-          christian-kohler.npm-intellisense
-          yoavbls.pretty-ts-errors
+              # gql
+              graphql.vscode-graphql
+              graphql.vscode-graphql-syntax
 
-          # html/css
-          bradlc.vscode-tailwindcss
-          formulahendry.auto-close-tag
-          formulahendry.auto-rename-tag
-          vincaslt.highlight-matching-tag
-          naumovs.color-highlight
+              # js/ts
+              christian-kohler.npm-intellisense
+              yoavbls.pretty-ts-errors
 
-          # format
-          dbaeumer.vscode-eslint
-          esbenp.prettier-vscode
+              # html/css
+              bradlc.vscode-tailwindcss
+              formulahendry.auto-close-tag
+              formulahendry.auto-rename-tag
+              vincaslt.highlight-matching-tag
+              naumovs.color-highlight
 
-          # git / github
-          eamodio.gitlens
+              # format
+              dbaeumer.vscode-eslint
+              esbenp.prettier-vscode
 
-          github.vscode-github-actions
-          github.vscode-pull-request-github
+              # git / github
+              eamodio.gitlens
 
-          # other
-          christian-kohler.path-intellisense
-          emmanuelbeziat.vscode-great-icons
-          firefox-devtools.vscode-firefox-debug
-          mikestead.dotenv
-          wix.vscode-import-cost
-          usernamehw.errorlens
-          streetsidesoftware.code-spell-checker
-          shardulm94.trailing-spaces
-          aaron-bond.better-comments
-        ]
-        ++ extensionsFromVscodeMarketplace [
-          {
-            name = "playwright";
-            publisher = "ms-playwright";
-            version = "latest";
-            sha256 = "sha256-B6RYsDp1UKZmBRT/GdTPqxGOyCz2wJYKAqYqSLsez+w=";
-          }
-          {
-            name = "code-spell-checker-british-english";
-            publisher = "streetsidesoftware";
-            version = "latest";
-            sha256 = "sha256-S1lGUMENNjMHUnNmgG4FihK0fFtDfluTKJ3v9tyiGJ4=";
-          }
-          {
-            name = "code-spell-checker-german";
-            publisher = "streetsidesoftware";
-            version = "latest";
-            sha256 = "sha256-40Oc6ycNog9cxG4G5gCps2ADrM/wLuKWFrD4lnd91Z4=";
-          }
-          {
-            name = "vscode-todo-highlight";
-            publisher = "wayou";
-            version = "latest";
-            sha256 = "sha256-CQVtMdt/fZcNIbH/KybJixnLqCsz5iF1U0k+GfL65Ok=";
-          }
-          {
-            name = "tokyo-night-moon";
-            publisher = "patricknasralla";
-            version = "latest";
-            sha256 = "sha256-8rUbsDCk7JHSN4vn+TNTmIrx8ma53hH/1x0trqDwU7Y=";
-          }
-          {
-            name = "vscode-css-peek";
-            publisher = "pranaygp";
-            version = "latest";
-            sha256 = "sha256-GX6J9DfIW9CLarSCfWhJQ9vvfUxy8QU0kh3cfRUZIaE=";
-          }
-          {
-            name = "cucumberautocomplete";
-            publisher = "alexkrechik";
-            version = "latest";
-            sha256 = "sha256-Tgqd4uoVgGJQKlj4JUM1CrjQhbi0qv9bAGz5NIHyofQ=";
-          }
-          {
-            name = "language-gettext";
-            publisher = "mrorz";
-            version = "latest";
-            sha256 = "sha256-1hdT2Fai0o48ojNqsjW+McokD9Nzt2By3vzhGUtgaeA=";
-          }
-          {
-            name = "vscode-typescript-next";
-            publisher = "ms-vscode";
-            version = "latest";
-            sha256 = "sha256-KKD3Oh930aQeVpW3hxB4kE7bm9m+2/Z7BhKwH1W8wA8=";
-          }
-          {
-            name = "react-proptypes-intellisense";
-            publisher = "ofhumanbondage";
-            version = "latest";
-            sha256 = "sha256-lmAjqOR+rznx5Q7W/ChRg8sb1NhqN2YtrwRn8zHYtRo=";
-          }
-          {
-            name = "shellcheck";
-            publisher = "timonwong";
-            version = "latest";
-            sha256 = "sha256-JSS0GY76+C5xmkQ0PNjt2Nu/uTUkfiUqmPL51r64tl0=";
-          }
-          {
-            name = "vscode-expo-tools";
-            publisher = "expo";
-            version = "latest";
-            sha256 = "sha256-g1/+6Y9s2yyxjbfLn1e0hN6wMsHVGXDJeUopvld8KOc=";
-          }
-        ];
+              github.vscode-github-actions
+              github.vscode-pull-request-github
 
-      keybindings = [
-        {
-          key = "alt+control+right";
-          command = "cursorWordPartRight";
-          when = "editorTextFocus";
-        }
-        {
-          key = "alt+control+left";
-          command = "cursorWordPartLeft";
-          when = "editorTextFocus";
-        }
-        {
-          key = "alt+control+shitft+left";
-          command = "cursorWordPartLeftSelect";
-          when = "editorTextFocus";
-        }
-        {
-          key = "alt+control+shitft+right";
-          command = "cursorWordPartRightSelect";
-          when = "editorTextFocus";
-        }
-      ];
+              # other
+              christian-kohler.path-intellisense
+              emmanuelbeziat.vscode-great-icons
+              firefox-devtools.vscode-firefox-debug
+              mikestead.dotenv
+              wix.vscode-import-cost
+              usernamehw.errorlens
+              streetsidesoftware.code-spell-checker
+              shardulm94.trailing-spaces
+              aaron-bond.better-comments
+            ]
+            ++ extensionsFromVscodeMarketplace [
+              {
+                name = "sqltools";
+                publisher = "mtxr";
+                version = "latest";
+                sha256 = "sha256-bTrHAhj8uwzRIImziKsOizZf8+k3t+VrkOeZrFx7SH8=";
+              }
+              {
+                name = "python";
+                publisher = "ms-python";
+                version = "latest";
+                sha256 = "sha256-f573A/7s8jVfH1f3ZYZSTftrfBs6iyMWewhorX4Z0Nc=";
+              }
+              {
+                name = "playwright";
+                publisher = "ms-playwright";
+                version = "latest";
+                sha256 = "sha256-B6RYsDp1UKZmBRT/GdTPqxGOyCz2wJYKAqYqSLsez+w=";
+              }
+              {
+                name = "code-spell-checker-british-english";
+                publisher = "streetsidesoftware";
+                version = "latest";
+                sha256 = "sha256-84RzNM9URDR1NZDYV4Z0IVLcWoPh/+k7Yv15VS+K3ho=";
+              }
+              {
+                name = "code-spell-checker-german";
+                publisher = "streetsidesoftware";
+                version = "latest";
+                sha256 = "sha256-40Oc6ycNog9cxG4G5gCps2ADrM/wLuKWFrD4lnd91Z4=";
+              }
+              {
+                name = "vscode-todo-highlight";
+                publisher = "wayou";
+                version = "latest";
+                sha256 = "sha256-CQVtMdt/fZcNIbH/KybJixnLqCsz5iF1U0k+GfL65Ok=";
+              }
+              {
+                name = "tokyo-night-moon";
+                publisher = "patricknasralla";
+                version = "latest";
+                sha256 = "sha256-8rUbsDCk7JHSN4vn+TNTmIrx8ma53hH/1x0trqDwU7Y=";
+              }
+              {
+                name = "vscode-css-peek";
+                publisher = "pranaygp";
+                version = "latest";
+                sha256 = "sha256-GX6J9DfIW9CLarSCfWhJQ9vvfUxy8QU0kh3cfRUZIaE=";
+              }
+              {
+                name = "cucumberautocomplete";
+                publisher = "alexkrechik";
+                version = "latest";
+                sha256 = "sha256-Tgqd4uoVgGJQKlj4JUM1CrjQhbi0qv9bAGz5NIHyofQ=";
+              }
+              {
+                name = "language-gettext";
+                publisher = "mrorz";
+                version = "latest";
+                sha256 = "sha256-1hdT2Fai0o48ojNqsjW+McokD9Nzt2By3vzhGUtgaeA=";
+              }
+              {
+                name = "vscode-typescript-next";
+                publisher = "ms-vscode";
+                version = "latest";
+                sha256 = "sha256-yfcXrmbaYV1juBE2ZTO94U7sc7cCb+sse3rzPhrVNyY=";
+              }
+              {
+                name = "react-proptypes-intellisense";
+                publisher = "ofhumanbondage";
+                version = "latest";
+                sha256 = "sha256-lmAjqOR+rznx5Q7W/ChRg8sb1NhqN2YtrwRn8zHYtRo=";
+              }
+              {
+                name = "shellcheck";
+                publisher = "timonwong";
+                version = "latest";
+                sha256 = "sha256-JSS0GY76+C5xmkQ0PNjt2Nu/uTUkfiUqmPL51r64tl0=";
+              }
+              {
+                name = "vscode-expo-tools";
+                publisher = "expo";
+                version = "latest";
+                sha256 = "sha256-g1/+6Y9s2yyxjbfLn1e0hN6wMsHVGXDJeUopvld8KOc=";
+              }
+            ];
 
-      userSettings = {
-        # Python specific settings
-        "[python]" = {
-          "editor.bracketPairColorization.enabled" = false;
-          "editor.guides.bracketPairs" = true;
-          "editor.tabSize" = 4;
-          "editor.defaultFormatter" = "charliermarsh.ruff";
-          "editor.formatOnSave" = true;
-          "diffEditor.ignoreTrimWhitespace" = true;
+          keybindings = [
+            {
+              key = "alt+control+right";
+              command = "cursorWordPartRight";
+              when = "editorTextFocus";
+            }
+            {
+              key = "alt+control+left";
+              command = "cursorWordPartLeft";
+              when = "editorTextFocus";
+            }
+            {
+              key = "alt+control+shitft+left";
+              command = "cursorWordPartLeftSelect";
+              when = "editorTextFocus";
+            }
+            {
+              key = "alt+control+shitft+right";
+              command = "cursorWordPartRightSelect";
+              when = "editorTextFocus";
+            }
+          ];
+
+          userSettings = {
+            # Python specific settings
+            "[python]" = {
+              "editor.bracketPairColorization.enabled" = false;
+              "editor.guides.bracketPairs" = true;
+              "editor.tabSize" = 4;
+              "editor.defaultFormatter" = "charliermarsh.ruff";
+              "editor.formatOnSave" = true;
+              "diffEditor.ignoreTrimWhitespace" = true;
+            };
+
+            "[nix]" = {
+              "editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
+            };
+
+            "[sql]" = {
+              "editor.defaultFormatter" = "mtxr.sqltools";
+            };
+
+            # General editor settings
+            "editor.bracketPairColorization.enabled" = true;
+            "editor.cursorStyle" = "block";
+            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+            "editor.detectIndentation" = false;
+            "editor.fontSize" = 14;
+            "editor.formatOnSave" = true;
+            "editor.gotoLocation.multipleDefinitions" = "gotoAndPeek";
+            "editor.guides.bracketPairs" = true;
+            "editor.minimap.enabled" = false;
+            "editor.multiCursorModifier" = "ctrlCmd";
+            "editor.renderControlCharacters" = true;
+            "editor.rulers" = [
+              80
+              120
+            ];
+            "editor.showFoldingControls" = "always";
+            "editor.snippetSuggestions" = "top";
+            "editor.tabSize" = 2;
+            "emmet.includeLanguages" = {
+              "erb" = "html";
+            };
+            "editor.codeActionsOnSave" = {
+              "source.fixAll" = "explicit";
+            };
+            "editor.quickSuggestions" = {
+              "other" = "on";
+              "comments" = "off";
+              "strings" = "on";
+            };
+            "emmet.showSuggestionsAsSnippets" = true;
+            "emmet.triggerExpansionOnTab" = true;
+            "explorer.confirmDelete" = false;
+
+            # File settings
+            "files.associations" = {
+              ".css" = "tailwindcss";
+            };
+            "files.exclude" = {
+              "__pycache__" = true;
+              "_site" = true;
+              ".asset-cache" = true;
+              ".bundle" = true;
+              ".ipynb_checkpoints" = true;
+              ".pytest_cache" = true;
+              ".sass-cache" = true;
+              ".svn" = true;
+              "**/.DS_Store" = true;
+              "**/.egg-info" = true;
+              "**/.git" = true;
+              "build" = true;
+              "coverage" = true;
+              "dist" = true;
+              "log" = true;
+              "node_modules" = false;
+              "public/packs" = true;
+              "tmp" = true;
+            };
+            "files.hotExit" = "off";
+            "files.insertFinalNewline" = true;
+            "files.trimFinalNewlines" = true;
+            "files.trimTrailingWhitespace" = true;
+            "files.watcherExclude" = {
+              "**/audits/**" = true;
+              "**/coverage/**" = true;
+              "**/log/**" = true;
+              "**/node_modules/**" = true;
+              "**/tmp/**" = true;
+              "**/vendor/**" = true;
+            };
+
+            # Notebook settings
+            "notebook.diff.ignoreMetadata" = true;
+            "notebook.lineNumbers" = "on";
+            "notebook.markup.fontSize" = 13;
+
+            # Python settings
+            "python.analysis.typeCheckingMode" = "basic";
+            "python.analysis.autoImportCompletions" = true;
+            "python.languageServer" = "Jedi";
+            "python.terminal.activateEnvironment" = false;
+
+            # Tailwind CSS settings
+            "tailwindCSS.experimental.classRegex" = [
+              [
+                "cva\\(([^)]*)\\)"
+                "[\"'`]([^\"'`]*).*?[\"'`]"
+              ]
+              [
+                "cx\\(([^)]*)\\)"
+                "(?:'|\"|`)([^']*)(?:'|\"|`)"
+              ]
+            ];
+
+            # Window settings
+            "window.restoreWindows" = "none";
+            "window.newWindowDimensions" = "maximized";
+            "window.zoomLevel" = -1;
+
+            # Workbench settings
+            "workbench.editor.enablePreview" = true;
+            "workbench.settings.editor" = "json";
+            "workbench.settings.openDefaultSettings" = false;
+            "workbench.settings.useSplitJSON" = true;
+            "workbench.startupEditor" = "newUntitledFile";
+            "workbench.panel.defaultLocation" = "bottom";
+            "security.workspace.trust.untrustedFiles" = "open";
+            "workbench.sideBar.location" = "right";
+            "workbench.colorTheme" = "Tokyo Night Moon";
+            "workbench.iconTheme" = "vscode-great-icons";
+
+            # Accessibility support
+            "editor.accessibilitySupport" = "off";
+
+            # Spell check settings
+            "cSpell.language" = "en,de-DE,en-GB,en-US,de";
+
+            # TypeScript settings
+            "typescript.updateImportsOnFileMove.enabled" = "always";
+            "typescript.preferences.importModuleSpecifier" = "non-relative";
+
+            # Playwright settings
+            "playwright.reuseBrowser" = true;
+
+            # GitHub settings
+            "githubPullRequests.pullBranch" = "never";
+            "go.toolsManagement.autoUpdate" = true;
+            "git.openRepositoryInParentFolders" = "always";
+
+            # Terminal settings
+            "terminal.external.osxExec" = "kitty.app";
+
+            # Editor associations
+            "workbench.editorAssociations" = {
+              "git-rebase-todo" = "default";
+            };
+
+            # Diff editor settings
+            "diffEditor.ignoreTrimWhitespace" = false;
+
+            # Makefile settings
+            "makefile.configureOnOpen" = true;
+          };
         };
-
-        "[nix]" = {
-          "editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
-        };
-
-        # General editor settings
-        "editor.bracketPairColorization.enabled" = true;
-        "editor.cursorStyle" = "block";
-        "editor.defaultFormatter" = "esbenp.prettier-vscode";
-        "editor.detectIndentation" = false;
-        "editor.fontSize" = 14;
-        "editor.formatOnSave" = true;
-        "editor.gotoLocation.multipleDefinitions" = "gotoAndPeek";
-        "editor.guides.bracketPairs" = true;
-        "editor.minimap.enabled" = false;
-        "editor.multiCursorModifier" = "ctrlCmd";
-        "editor.renderControlCharacters" = true;
-        "editor.rulers" = [
-          80
-          120
-        ];
-        "editor.showFoldingControls" = "always";
-        "editor.snippetSuggestions" = "top";
-        "editor.tabSize" = 2;
-        "emmet.includeLanguages" = {
-          "erb" = "html";
-        };
-        "editor.codeActionsOnSave" = {
-          "source.fixAll" = "explicit";
-        };
-        "editor.quickSuggestions" = {
-          "other" = "on";
-          "comments" = "off";
-          "strings" = "on";
-        };
-        "emmet.showSuggestionsAsSnippets" = true;
-        "emmet.triggerExpansionOnTab" = true;
-        "explorer.confirmDelete" = false;
-
-        # File settings
-        "files.associations" = {
-          ".css" = "tailwindcss";
-        };
-        "files.exclude" = {
-          "__pycache__" = true;
-          "_site" = true;
-          ".asset-cache" = true;
-          ".bundle" = true;
-          ".ipynb_checkpoints" = true;
-          ".pytest_cache" = true;
-          ".sass-cache" = true;
-          ".svn" = true;
-          "**/.DS_Store" = true;
-          "**/.egg-info" = true;
-          "**/.git" = true;
-          "build" = true;
-          "coverage" = true;
-          "dist" = true;
-          "log" = true;
-          "node_modules" = false;
-          "public/packs" = true;
-          "tmp" = true;
-        };
-        "files.hotExit" = "off";
-        "files.insertFinalNewline" = true;
-        "files.trimFinalNewlines" = true;
-        "files.trimTrailingWhitespace" = true;
-        "files.watcherExclude" = {
-          "**/audits/**" = true;
-          "**/coverage/**" = true;
-          "**/log/**" = true;
-          "**/node_modules/**" = true;
-          "**/tmp/**" = true;
-          "**/vendor/**" = true;
-        };
-
-        # Notebook settings
-        "notebook.diff.ignoreMetadata" = true;
-        "notebook.lineNumbers" = "on";
-        "notebook.markup.fontSize" = 13;
-
-        # Python settings
-        "python.analysis.typeCheckingMode" = "basic";
-        "python.analysis.autoImportCompletions" = true;
-        "python.languageServer" = "Jedi";
-        "python.terminal.activateEnvironment" = false;
-
-        # Tailwind CSS settings
-        "tailwindCSS.experimental.classRegex" = [
-          [
-            "cva\\(([^)]*)\\)"
-            "[\"'`]([^\"'`]*).*?[\"'`]"
-          ]
-          [
-            "cx\\(([^)]*)\\)"
-            "(?:'|\"|`)([^']*)(?:'|\"|`)"
-          ]
-        ];
-
-        # Window settings
-        "window.restoreWindows" = "none";
-        "window.newWindowDimensions" = "maximized";
-        "window.zoomLevel" = -1;
-
-        # Workbench settings
-        "workbench.editor.enablePreview" = true;
-        "workbench.settings.editor" = "json";
-        "workbench.settings.openDefaultSettings" = false;
-        "workbench.settings.useSplitJSON" = true;
-        "workbench.startupEditor" = "newUntitledFile";
-        "workbench.panel.defaultLocation" = "bottom";
-        "security.workspace.trust.untrustedFiles" = "open";
-        "workbench.sideBar.location" = "right";
-        "workbench.colorTheme" = "Tokyo Night Moon";
-        "workbench.iconTheme" = "vscode-great-icons";
-
-        # Accessibility support
-        "editor.accessibilitySupport" = "off";
-
-        # Spell check settings
-        "cSpell.language" = "en,de-DE,en-GB,en-US,de";
-
-        # TypeScript settings
-        "typescript.updateImportsOnFileMove.enabled" = "always";
-        "typescript.preferences.importModuleSpecifier" = "non-relative";
-
-        # Playwright settings
-        "playwright.reuseBrowser" = true;
-
-        # GitHub settings
-        "githubPullRequests.pullBranch" = "never";
-        "go.toolsManagement.autoUpdate" = true;
-        "git.openRepositoryInParentFolders" = "always";
-
-        # Terminal settings
-        "terminal.external.osxExec" = "kitty.app";
-
-        # Editor associations
-        "workbench.editorAssociations" = {
-          "git-rebase-todo" = "default";
-        };
-
-        # Diff editor settings
-        "diffEditor.ignoreTrimWhitespace" = false;
-
-        # Makefile settings
-        "makefile.configureOnOpen" = true;
       };
     };
 

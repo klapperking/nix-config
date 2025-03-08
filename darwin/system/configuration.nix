@@ -66,9 +66,7 @@
     };
   };
 
-  security.pam.enableSudoTouchIdAuth = true;
-
-  services.nix-daemon.enable = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   system = {
     activationScripts = {
@@ -93,7 +91,7 @@
           "/Applications/Slack.app"
           "/Applications/Thunderbird.app"
           "${pkgs.firefox-devedition-bin}/Applications/Firefox Developer Edition.app"
-          "${pkgs.obsidian}/Applications/Obsidian.app"
+          # "${pkgs.obsidian}/Applications/Obsidian.app"
           "${pkgs.vscodium}/Applications/VSCodium.app"
           "${pkgs.kitty}/Applications/kitty.app"
         ];
