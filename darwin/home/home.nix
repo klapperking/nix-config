@@ -28,7 +28,7 @@
     gh-eco
     gnupg
     google-chrome
-    kitty # TODO: use unstable once not broken anymore
+    kitty
     meslo-lgs-nf
     nixfmt-rfc-style
     # TODO: figure out how to write to /etc/pam.d/sudo to make this work
@@ -591,6 +591,12 @@
                 publisher = "mtxr";
                 version = "latest";
                 sha256 = "sha256-bTrHAhj8uwzRIImziKsOizZf8+k3t+VrkOeZrFx7SH8=";
+              }
+              {
+                name = "oxc-vscode";
+                publisher = "oxc";
+                version = "latest";
+                sha256 = "sha256-mbEBS67KcDUrCWTuBPyIUetPIfcgQ6C78OoHCAltpFM=";
               }
               {
                 name = "python";

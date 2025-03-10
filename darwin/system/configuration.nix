@@ -22,19 +22,60 @@
     brews = [
       "hasura-cli"
     ];
+    caskArgs = {
+      require_sha = true;
+    };
     casks = [
-      "1password"
-      "aircall"
-      "bitwarden"
-      "linear-linear"
-      "figma"
-      "orbstack"
-      "docker"
-      "slack"
-      "spotify"
-      "thunderbird"
-      "whatsapp"
+      {
+        name = "1password";
+        greedy = true;
+      }
+      {
+        name = "aircall";
+        greedy = true;
+      }
+      {
+        name = "bitwarden";
+        greedy = true;
+      }
+      {
+        name = "linear-linear";
+        greedy = true;
+      }
+      {
+        name = "figma";
+        greedy = true;
+      }
+      {
+        name = "orbstack";
+        greedy = true;
+      }
+      {
+        name = "docker";
+        greedy = true;
+      }
+      {
+        name = "slack";
+        greedy = true;
+      }
+      {
+        name = "spotify";
+        greedy = true;
+      }
+      {
+        name = "thunderbird";
+        greedy = true;
+      }
+      {
+        name = "obsidian";
+        greedy = true;
+      }
+      {
+        name = "whatsapp";
+        greedy = true;
+      }
     ];
+
     masApps = { };
     whalebrews = [ ];
     onActivation = {
