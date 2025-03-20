@@ -20,7 +20,7 @@
     bc
     # darwin.xcode # TODO: Install xcode apple devtools
     docker_26
-    firefox-devedition-bin # firefox broken on darwin, use from overlay
+    firefox-devedition-unwrapped
     # TODO: get a signed version or sign so 1password integration works
     fzf
     jq
@@ -44,6 +44,7 @@
     tmuxPlugins.yank
     # obsidian
     vscodium
+    zed-editor
     zsh
     zsh-powerlevel10k
   ];
@@ -75,7 +76,7 @@
 
     firefox = {
       enable = true;
-      package = pkgs.firefox-devedition-bin;
+      package = pkgs.firefox-devedition-unwrapped;
       languagePacks = [
         "en-US"
         "de"
@@ -214,8 +215,8 @@
             default = "Kagi Search";
             order = [
               "Kagi Search"
-              "DuckDuckGo"
-              "Google"
+              "ddg"
+              "google"
             ];
             engines = {
               "Kagi Search" = {
@@ -254,25 +255,25 @@
               };
               "NixOS Wiki" = {
                 urls = [ { template = "https://nixos.wiki/index.php?search={searchTerms}"; } ];
-                iconUpdateURL = "https://nixos.wiki/favicon.png";
+                icon = "https://nixos.wiki/favicon.png";
                 updateInterval = 24 * 60 * 60 * 1000;
                 definedAliases = [ "@nw" ];
               };
               "MyNixOS" = {
                 urls = [ { template = "https://mynixos.com/search?q={searchTerms}"; } ];
-                iconUpdateURL = "https://mynixos.com/favicon-32x32.png";
+                icon = "https://mynixos.com/favicon-32x32.png";
                 updateInterval = 24 * 60 * 60 * 1000;
                 definedAliases = [ "@nc" ];
               };
               "Nixhub.io" = {
                 urls = [ { template = "https://nixhub.io/search?q={searchTerms}"; } ];
-                iconUpdateURL = "https://www.nixhub.io/favicon.ico";
+                icon = "https://www.nixhub.io/favicon.ico";
                 updateInterval = 24 * 60 * 60 * 1000;
                 definedAliases = [ "@nh" ];
               };
-              "DuckDuckGo".metaData.alis = "@d";
-              "Bing".metaData.hidden = true;
-              "Google".metaData.alias = "@g";
+              "ddg".metaData.alis = "@d";
+              "bing".metaData.hidden = true;
+              "google".metaData.alias = "@g";
             };
           };
 

@@ -5,8 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable-2411.url = "github:NixOS/nixpkgs/release-24.11";
 
-    nixpkgs-firefox-darwin.url = "github:bandithedoge/nixpkgs-firefox-darwin";
-
     darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -80,7 +78,6 @@
             home-manager.darwinModules.home-manager
             {
               nixpkgs.overlays = [
-                inputs.nixpkgs-firefox-darwin.overlay
                 inputs.nur.overlays.default
               ];
               home-manager.extraSpecialArgs = { inherit (specialArgs) pkgs-stable; };
@@ -91,6 +88,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.martin = import ./darwin/home/home.nix;
+              home-manager.backupFileExtension = "backup";
             }
           ];
         };

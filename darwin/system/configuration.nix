@@ -5,7 +5,7 @@
 }:
 
 # TODO: Setup system postgres
-# TODO: Overwrite default system ssh ?
+# TODO: Overwrite default system ssh ?fir
 {
   # symlink system packages to home manager zsh for completion access
   environment.pathsToLink = [ "/share/zsh/" ];
@@ -36,6 +36,10 @@
       }
       {
         name = "bitwarden";
+        greedy = true;
+      }
+      {
+        name = "discord";
         greedy = true;
       }
       {
@@ -131,7 +135,7 @@
           "/Applications/WhatsApp.app"
           "/Applications/Slack.app"
           "/Applications/Thunderbird.app"
-          "${pkgs.firefox-devedition-bin}/Applications/Firefox Developer Edition.app"
+          "${pkgs.firefox-devedition-unwrapped}/Applications/Firefox Developer Edition.app"
           # "${pkgs.obsidian}/Applications/Obsidian.app"
           "${pkgs.vscodium}/Applications/VSCodium.app"
           "${pkgs.kitty}/Applications/kitty.app"
