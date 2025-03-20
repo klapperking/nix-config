@@ -591,13 +591,13 @@
                 name = "sqltools";
                 publisher = "mtxr";
                 version = "latest";
-                sha256 = "sha256-bTrHAhj8uwzRIImziKsOizZf8+k3t+VrkOeZrFx7SH8=";
+                sha256 = "sha256-ExeerCI5yDa/DJqNOwENDjw+xhMPNil6JgCAUNdTXy8=";
               }
               {
                 name = "oxc-vscode";
                 publisher = "oxc";
                 version = "latest";
-                sha256 = "sha256-mbEBS67KcDUrCWTuBPyIUetPIfcgQ6C78OoHCAltpFM=";
+                sha256 = "sha256-s8IGat9iRVMIBmJE9gCoSkMIwE7Y5J5hZ5uLL2oWN+o=";
               }
               {
                 name = "python";
@@ -609,13 +609,13 @@
                 name = "playwright";
                 publisher = "ms-playwright";
                 version = "latest";
-                sha256 = "sha256-B6RYsDp1UKZmBRT/GdTPqxGOyCz2wJYKAqYqSLsez+w=";
+                sha256 = "sha256-gSIWwD8WHKMM5wpuPpSKpBB+oxaqO2vO8wHTN43jmrM=";
               }
               {
                 name = "code-spell-checker-british-english";
                 publisher = "streetsidesoftware";
                 version = "latest";
-                sha256 = "sha256-84RzNM9URDR1NZDYV4Z0IVLcWoPh/+k7Yv15VS+K3ho=";
+                sha256 = "sha256-Sg84bSznWuFLT9CW1XNQX2P35lVYwOfFRDf6b5GGXy0=";
               }
               {
                 name = "code-spell-checker-german";
@@ -639,7 +639,7 @@
                 name = "vscode-css-peek";
                 publisher = "pranaygp";
                 version = "latest";
-                sha256 = "sha256-GX6J9DfIW9CLarSCfWhJQ9vvfUxy8QU0kh3cfRUZIaE=";
+                sha256 = "sha256-oY+mpDv2OTy5hFEk2DMNHi9epFm4Ay4qi0drCXPuYhU=";
               }
               {
                 name = "cucumberautocomplete";
@@ -657,7 +657,7 @@
                 name = "vscode-typescript-next";
                 publisher = "ms-vscode";
                 version = "latest";
-                sha256 = "sha256-yfcXrmbaYV1juBE2ZTO94U7sc7cCb+sse3rzPhrVNyY=";
+                sha256 = "sha256-y9OY4l/INPa5or+e+6LcdToaMaSX16pxvOHvvHIu/Ok=";
               }
               {
                 name = "react-proptypes-intellisense";
@@ -675,7 +675,7 @@
                 name = "vscode-expo-tools";
                 publisher = "expo";
                 version = "latest";
-                sha256 = "sha256-g1/+6Y9s2yyxjbfLn1e0hN6wMsHVGXDJeUopvld8KOc=";
+                sha256 = "sha256-on+QlNwHQzmBBDYkRWJ2hVMuW+xLhJHx7Og6tuR2nMo=";
               }
             ];
 
