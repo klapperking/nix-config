@@ -18,7 +18,7 @@
     _1password-cli
     age
     bc
-    # darwin.xcode # TODO: Install xcode apple devtools
+    darwin.xcode_16
     docker_26
     firefox-devedition-unwrapped
     # TODO: get a signed version or sign so 1password integration works
@@ -42,7 +42,7 @@
     tmux
     tmuxPlugins.tokyo-night-tmux
     tmuxPlugins.yank
-    # obsidian
+    obsidian
     vscodium
     zed-editor
     zsh
@@ -465,10 +465,10 @@
       shellIntegration.enableZshIntegration = true;
     };
 
-    thefuck = {
-      enable = true;
-      enableZshIntegration = true;
-    };
+    # thefuck = {
+    #   enable = true;
+    #   enableZshIntegration = true;
+    # };
 
     tmux = {
       enable = true;

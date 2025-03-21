@@ -71,10 +71,6 @@
         greedy = true;
       }
       {
-        name = "obsidian";
-        greedy = true;
-      }
-      {
         name = "whatsapp";
         greedy = true;
       }

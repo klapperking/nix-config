@@ -20,7 +20,10 @@
     mac-app-util.url = "github:hraban/mac-app-util";
     sops-nix.url = "github:Mic92/sops-nix";
 
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    # Replace after: https://github.com/zhaofengli/nix-homebrew/issues/70 closes
+    nix-homebrew.url = "git+https://github.com/zhaofengli/nix-homebrew?ref=refs/pull/71/merge";
+    # nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+
     homebrew-bundle = {
       url = "github:homebrew/homebrew-bundle";
       flake = false;
