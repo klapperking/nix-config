@@ -132,7 +132,7 @@
           "/Applications/Slack.app"
           "/Applications/Thunderbird.app"
           "${pkgs.firefox-devedition-unwrapped}/Applications/Firefox Developer Edition.app"
-          # "${pkgs.obsidian}/Applications/Obsidian.app"
+          "${pkgs.obsidian}/Applications/Obsidian.app"
           "${pkgs.vscodium}/Applications/VSCodium.app"
           "${pkgs.kitty}/Applications/kitty.app"
         ];

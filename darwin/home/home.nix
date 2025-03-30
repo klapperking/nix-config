@@ -21,7 +21,6 @@
     darwin.xcode_16
     docker_26
     firefox-devedition-unwrapped
-    # TODO: get a signed version or sign so 1password integration works
     fzf
     jq
     git
@@ -30,6 +29,7 @@
     google-chrome
     kitty
     meslo-lgs-nf
+    nixd
     nixfmt-rfc-style
     # TODO: figure out how to write to /etc/pam.d/sudo to make this work
     # for tmux reattach-to-user-namespace
@@ -39,11 +39,13 @@
     rectangle
     ripgrep
     shellcheck
+    skhd
     tmux
     tmuxPlugins.tokyo-night-tmux
     tmuxPlugins.yank
     obsidian
     vscodium
+    yabai
     zed-editor
     zsh
     zsh-powerlevel10k
@@ -51,7 +53,7 @@
 
   home.sessionVariables = {
     TERMINAL = "kitty";
-    EDITOR = "codium";
+    EDITOR = "zed";
     # use fake omz cache dir for completions
     ZSH_CACHE_DIR = "${config.home.homeDirectory}/.cache/oh-my-zsh";
   };
@@ -357,7 +359,7 @@
           ui = true;
         };
         core = {
-          editor = "codium --wait";
+          editor = "zed --wait";
           pager = "less -FRSX";
         };
         help = {
@@ -371,6 +373,7 @@
         };
         push = {
           default = "simple";
+          autoSetupRemote = true;
         };
         rerere = {
           enabled = true;
@@ -597,7 +600,7 @@
                 name = "oxc-vscode";
                 publisher = "oxc";
                 version = "latest";
-                sha256 = "sha256-s8IGat9iRVMIBmJE9gCoSkMIwE7Y5J5hZ5uLL2oWN+o=";
+                sha256 = "sha256-KYZ5i+7snd+3Ao3dh+L51BFZRrhPmdv1ts9eBFQUR1I=";
               }
               {
                 name = "python";
@@ -615,7 +618,7 @@
                 name = "code-spell-checker-british-english";
                 publisher = "streetsidesoftware";
                 version = "latest";
-                sha256 = "sha256-Sg84bSznWuFLT9CW1XNQX2P35lVYwOfFRDf6b5GGXy0=";
+                sha256 = "sha256-vyFWXYiGKo8Rm0OYAF4QN8HrN73idJw3WsQWtP7csto=";
               }
               {
                 name = "code-spell-checker-german";
@@ -657,7 +660,7 @@
                 name = "vscode-typescript-next";
                 publisher = "ms-vscode";
                 version = "latest";
-                sha256 = "sha256-y9OY4l/INPa5or+e+6LcdToaMaSX16pxvOHvvHIu/Ok=";
+                sha256 = "sha256-CNm3r1KTa86GdHsrDW59aA8v2X0a/WRmmxm4BRjZrPs=";
               }
               {
                 name = "react-proptypes-intellisense";
@@ -967,6 +970,8 @@
     gpg-agent = {
       enable = true;
       enableZshIntegration = true;
+      defaultCacheTtl = 21600; # 6 hours
+      maxCacheTtl =  86400; # 1 day
       pinentryPackage = pkgs.pinentry-tty;
     };
   };
