@@ -51,11 +51,22 @@
         greedy = true;
       }
       {
+        name = "google-drive";
+        greedy = true;
+        args = {
+          require_sha = false;
+        };
+      }
+      {
         name = "orbstack";
         greedy = true;
       }
       {
         name = "docker";
+        greedy = true;
+      }
+      {
+        name = "raspberry-pi-imager";
         greedy = true;
       }
       {
@@ -107,7 +118,10 @@
     };
   };
 
-  security.pam.services.sudo_local.touchIdAuth = true;
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    reattach = true;
+  };
 
   system = {
     activationScripts = {
@@ -182,7 +196,6 @@
     };
 
     stateVersion = 5;
-
   };
 
   users.users = {

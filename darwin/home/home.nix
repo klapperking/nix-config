@@ -1,18 +1,15 @@
 {
   pkgs,
-  pkgs-stable,
   config,
   ...
-}@inputs:
+}:
 {
   home.stateVersion = "24.05";
-
-  # TODO: yabai window manager
-  # TODO: Sops
 
   home.username = "martin";
   home.homeDirectory = "/Users/martin";
 
+  # TODO: Sops
   # TODO: move dev-related packages into a dev-module and include for users
   home.packages = with pkgs; [
     _1password-cli
@@ -31,21 +28,15 @@
     meslo-lgs-nf
     nixd
     nixfmt-rfc-style
-    # TODO: figure out how to write to /etc/pam.d/sudo to make this work
-    # for tmux reattach-to-user-namespace
-    # see https://github.com/LnL7/nix-darwin/issues/985 for workaround or fix
-    # pam-reattach
     pinentry-tty
     rectangle
     ripgrep
     shellcheck
-    skhd
     tmux
     tmuxPlugins.tokyo-night-tmux
     tmuxPlugins.yank
     obsidian
     vscodium
-    yabai
     zed-editor
     zsh
     zsh-powerlevel10k
@@ -67,7 +58,7 @@
 
     chromium = {
       enable = true;
-      package = pkgs.google-chrome; # TODO: darwin chromium overlay!
+      package = pkgs.google-chrome;
     };
 
     direnv = {
@@ -468,10 +459,16 @@
       shellIntegration.enableZshIntegration = true;
     };
 
-    # thefuck = {
-    #   enable = true;
-    #   enableZshIntegration = true;
-    # };
+    lsd = {
+      enable = true;
+      enableAliases = true;
+      # TODO: Custom colors and icons
+    };
+
+    thefuck = {
+      enable = true;
+      enableZshIntegration = true;
+    };
 
     tmux = {
       enable = true;

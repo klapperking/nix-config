@@ -68,7 +68,7 @@
                 enableRosetta = true;
                 user = "martin";
                 autoMigrate = true;
-                taps = with inputs; {
+                taps = {
                   "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
                   "homebrew/homebrew-core" = inputs.homebrew-core;
                   "homebrew/homebrew-cask" = inputs.homebrew-cask;
