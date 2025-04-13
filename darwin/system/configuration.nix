@@ -11,6 +11,7 @@
   environment.pathsToLink = [ "/share/zsh/" ];
 
   environment.systemPackages = with pkgs; [
+    lua5_4 # for sketchybar
     vim
     devenv
   ];
@@ -20,6 +21,7 @@
     # use taps declared by nix-homebrew
     taps = builtins.attrNames config.nix-homebrew.taps;
     brews = [
+      "balena-cli" # TODO: Fix .dockerignore for balena pushes erroring on nix-symlinks
       "hasura-cli"
     ];
     caskArgs = {
@@ -121,6 +123,71 @@
   security.pam.services.sudo_local = {
     touchIdAuth = true;
     reattach = true;
+  };
+
+  services = {
+    yabai = {
+      enable = true;
+      # SIP needs to be disbaled, see: https://github.com/koekeishiya/yabai/wiki#quickstart-guide
+      enableScriptingAddition = true;
+      package = pkgs.yabai;
+      config =
+        let
+          gap_top = 4;
+          gap_bottom = 4;
+          gap_left = 4;
+          gap_right = 0;
+          gap_inner = 4;
+          colors_focused = "0xE0808080";
+          colors_normal = "0x00010101";
+          colors_preselect = "0xE02d74da";
+        in
+        {
+          layout = "bsp";
+          window_placement = "second_child";
+
+          top_padding = gap_top;
+          bottom_padding = gap_bottom;
+          left_padding = gap_left;
+          right_padding = gap_right;
+          window_gap = gap_inner;
+
+          mouse_follows_focus = "autoraise";
+          focus_follows_mouse = "off";
+
+          window_opacity = "off";
+          window_topmost = "off";
+          window_shadow = "float";
+
+          window_border = "on";
+          window_border_width = 2;
+          active_window_border_color = colors_focused;
+          normal_window_border_color = colors_normal;
+          insert_feedback_color = colors_preselect;
+
+          active_window_opacity = 1.0;
+          normal_window_opacity = 0.90;
+          split_ratio = 0.50;
+
+          auto_balance = "off";
+
+          mouse_modifier = "fn";
+          mouse_action1 = "move";
+          mouse_action2 = "resize";
+        };
+      # TODO: These extra config rules are not working yet, also need one for slack etc. + start 4 spaces on load
+      extraConfig = ''
+        yabai -m rule --add label='Finder' app='^Finder$' title='(Co(py|nnect)|Move|Info|Pref)' manage=off
+        yabai -m rule --add label='Safari' app='^Safari$' title='^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$' manage=off
+        yabai -m rule --add label='System Preferences' app='^System Preferences$' title='.*' manage=off
+        yabai -m rule --add label='App Store' app='^App Store$' manage=off
+        yabai -m rule --add label='Activity Monitor' app='^Activity Monitor$' manage=off
+        yabai -m rule --add label='Calculator' app='^Calculator$' manage=off
+        yabai -m rule --add label='Dictionary' app='^Dictionary$' manage=off
+        yabai -m rule --add label='Software Update' title='Software Update' manage=off
+        yabai -m rule --add label='About This Mac' app='System Information' title='About This Mac' manage=off
+      '';
+    };
   };
 
   system = {
