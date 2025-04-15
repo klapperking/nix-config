@@ -4,49 +4,79 @@
   ...
 }:
 {
-  home.stateVersion = "24.05";
+  home = {
+    homeDirectory = "/Users/martin";
+    username = "martin";
+    stateVersion = "24.05";
 
-  home.username = "martin";
-  home.homeDirectory = "/Users/martin";
+    # TODO: Sops
+    # TODO: move dev-related packages into a dev-module and include for users
+    packages = with pkgs; [
+      _1password-cli
+      age
+      bc
+      darwin.xcode_16
+      docker_28
+      firefox-devedition-unwrapped
+      fzf
+      jq
+      git
+      gh-eco
+      gnupg
+      google-chrome
+      kitty
+      meslo-lgs-nf
+      nixd
+      nixfmt-rfc-style
+      pinentry-tty
+      rectangle
+      ripgrep
+      sbarlua
+      sketchybar-app-font
+      shellcheck
+      tmux
+      tmuxPlugins.tokyo-night-tmux
+      tmuxPlugins.yank
+      obsidian
+      vscodium
+      zed-editor
+      zsh
+      zsh-powerlevel10k
+    ];
 
-  # TODO: Sops
-  # TODO: move dev-related packages into a dev-module and include for users
-  home.packages = with pkgs; [
-    _1password-cli
-    age
-    bc
-    darwin.xcode_16
-    docker_28
-    firefox-devedition-unwrapped
-    fzf
-    jq
-    git
-    gh-eco
-    gnupg
-    google-chrome
-    kitty
-    meslo-lgs-nf
-    nixd
-    nixfmt-rfc-style
-    pinentry-tty
-    rectangle
-    ripgrep
-    shellcheck
-    tmux
-    tmuxPlugins.tokyo-night-tmux
-    tmuxPlugins.yank
-    obsidian
-    vscodium
-    zed-editor
-    zsh
-    zsh-powerlevel10k
-  ];
+    sessionVariables = {
+      TERMINAL      = "kitty";
+      EDITOR        = "zed";
+      # use fake omz cache dir for completions
+      ZSH_CACHE_DIR = "${config.home.homeDirectory}/.cache/oh-my-zsh";
+    };
 
-  home.sessionVariables = {
-    TERMINAL = "kitty";
-    EDITOR = "zed";
-    # use fake omz cache dir for completions
-    ZSH_CACHE_DIR = "${config.home.homeDirectory}/.cache/oh-my-zsh";
+    # TODO: move to other place, so actual lua config can be included?
+    # file = {
+    #   ".config/sketchybar" = {
+    #     source = builtins.path { path = ./sketchybar; };
+    #     recursive = true;
+    #     onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
+    #   };
+
+    #   ".local/share/sketchybar_lua/sketchybar.so" = {
+    #     source = "${pkgs.sbarlua}/lib/sketchybar.so";
+    #     onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
+    #   };
+
+    #   # TODO: Fetch / Copy these from sketchybar example config into this repo! (bar now is empty)
+    #   ".config/sketchybar/sketchybarrc" = {
+    #     text = ''
+    #         #!/usr/bin/env ${pkgs.lua54Packages.lua}/bin/lua
+    #         package.path = "./sketchybar/?.lua;./sketchybar/?/init.lua;" .. package.path
+    #         -- Load the sketchybar-package and prepare the helper binaries
+    #         require("helpers")
+    #         require("init")
+    #     '';
+    #     executable = true;
+    #     onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
+    #   };
+    # };
   };
 
   programs = {

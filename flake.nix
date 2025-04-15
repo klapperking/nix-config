@@ -34,6 +34,12 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+
+    # too lazy to make actual own derivation, all credits to: https://github.com/Lalit64 &  https://github.com:gangjun06
+    sbarlua = {
+      url = "github:lalit64/SbarLua/nix-darwin-package";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -80,16 +86,28 @@
             {
               nixpkgs.overlays = [
                 inputs.nur.overlays.default
+                inputs.sbarlua.overlay
               ];
-              home-manager.extraSpecialArgs = { inherit (specialArgs) pkgs-stable; };
-              home-manager.sharedModules = [
-                mac-app-util.homeManagerModules.default
-                inputs.sops-nix.homeManagerModules.sops
-              ];
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.martin = import ./darwin/home/home.nix;
-              home-manager.backupFileExtension = "backup";
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit (specialArgs) pkgs-stable;
+                };
+
+                sharedModules = [
+                  mac-app-util.homeManagerModules.default
+                  inputs.sops-nix.homeManagerModules.sops
+                ];
+
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.martin = {
+                  imports = [
+                    ./darwin/home/home.nix
+                    ./darwin/home/sketchybar/sketchybar.nix
+                  ];
+                };
+                backupFileExtension = "backup";
+              };
             }
           ];
         };

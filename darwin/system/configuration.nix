@@ -3,18 +3,18 @@
   config,
   ...
 }:
-
 # TODO: Setup system postgres
-# TODO: Overwrite default system ssh ?fir
+# TODO: ? Overwrite default system ssh
 {
-  # symlink system packages to home manager zsh for completion access
-  environment.pathsToLink = [ "/share/zsh/" ];
-
-  environment.systemPackages = with pkgs; [
-    lua5_4 # for sketchybar
-    vim
-    devenv
-  ];
+  environment = {
+    # symlink system packages to home manager zsh for completion access
+    pathsToLink = [ "/share/zsh/" ];
+    systemPackages = with pkgs; [
+      lua54Packages.lua # specific lua version for sbarlua overlay
+      vim
+      devenv
+    ];
+  };
 
   homebrew = {
     enable = true;
@@ -126,9 +126,19 @@
   };
 
   services = {
+
+    sketchybar = {
+      enable = true;
+      package = pkgs.sketchybar;
+      # ? is this even needed?
+      extraPackages = [
+        pkgs.jq
+      ];
+    };
+
     yabai = {
       enable = true;
-      # SIP needs to be disbaled, see: https://github.com/koekeishiya/yabai/wiki#quickstart-guide
+      # SIP needs to be disabled, see: https://github.com/koekeishiya/yabai/wiki#quickstart-guide
       enableScriptingAddition = true;
       package = pkgs.yabai;
       config =
@@ -136,8 +146,9 @@
           gap_top = 4;
           gap_bottom = 4;
           gap_left = 4;
-          gap_right = 0;
+          gap_right = 4;
           gap_inner = 4;
+          # TODO: Replace focus colors with jankyborders
           colors_focused = "0xE0808080";
           colors_normal = "0x00010101";
           colors_preselect = "0xE02d74da";
@@ -175,17 +186,19 @@
           mouse_action1 = "move";
           mouse_action2 = "resize";
         };
-      # TODO: These extra config rules are not working yet, also need one for slack etc. + start 4 spaces on load
+      # TODO: update these rules to actually match correctly + figure out default float positions (center + size)
       extraConfig = ''
         yabai -m rule --add label='Finder' app='^Finder$' title='(Co(py|nnect)|Move|Info|Pref)' manage=off
         yabai -m rule --add label='Safari' app='^Safari$' title='^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$' manage=off
-        yabai -m rule --add label='System Preferences' app='^System Preferences$' title='.*' manage=off
+        yabai -m rule --add label='System Settings' app='^System Settings$' title='.*' manage=off
         yabai -m rule --add label='App Store' app='^App Store$' manage=off
         yabai -m rule --add label='Activity Monitor' app='^Activity Monitor$' manage=off
         yabai -m rule --add label='Calculator' app='^Calculator$' manage=off
         yabai -m rule --add label='Dictionary' app='^Dictionary$' manage=off
         yabai -m rule --add label='Software Update' title='Software Update' manage=off
         yabai -m rule --add label='About This Mac' app='System Information' title='About This Mac' manage=off
+
+        yabai -m rule --add label='Slack' app='Slack' title='.*' manage=off
       '';
     };
   };
