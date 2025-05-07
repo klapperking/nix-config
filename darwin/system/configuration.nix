@@ -21,7 +21,6 @@
     # use taps declared by nix-homebrew
     taps = builtins.attrNames config.nix-homebrew.taps;
     brews = [
-      "balena-cli" # TODO: Fix .dockerignore for balena pushes erroring on nix-symlinks
       "hasura-cli"
     ];
     caskArgs = {
@@ -74,6 +73,20 @@
       {
         name = "slack";
         greedy = true;
+      }
+      {
+        name = "font-sf-mono";
+        greedy = true;
+        args = {
+          require_sha = false;
+        };
+      }
+      {
+        name = "font-sf-pro";
+        greedy = true;
+        args = {
+          require_sha = false;
+        };
       }
       {
         name = "spotify";
@@ -143,19 +156,21 @@
       package = pkgs.yabai;
       config =
         let
-          gap_top = 4;
-          gap_bottom = 4;
-          gap_left = 4;
-          gap_right = 4;
-          gap_inner = 4;
-          # TODO: Replace focus colors with jankyborders
-          colors_focused = "0xE0808080";
-          colors_normal = "0x00010101";
-          colors_preselect = "0xE02d74da";
+          gap_top = 8;
+          gap_bottom = 8;
+          gap_left = 8;
+          gap_right = 8;
+          gap_inner = 10;
+
+          colors_preselect = "0xff9dd274";
         in
         {
           layout = "bsp";
           window_placement = "second_child";
+          window_shadow = "float";
+          window_topmost = "off";
+
+          external_bar = "all:40:0";
 
           top_padding = gap_top;
           bottom_padding = gap_bottom;
@@ -167,19 +182,20 @@
           focus_follows_mouse = "off";
 
           window_opacity = "off";
-          window_topmost = "off";
-          window_shadow = "float";
+          # window_opacity_duration = 0.2;
+          # active_window_opacity = 1.0;
+          # normal_window_opacity = 0.80;
+          # window_animation_duration = 0.5;
+          # window_animation_easing = "ease_out_quint";
 
-          window_border = "on";
-          window_border_width = 2;
-          active_window_border_color = colors_focused;
-          normal_window_border_color = colors_normal;
           insert_feedback_color = colors_preselect;
 
-          active_window_opacity = 1.0;
-          normal_window_opacity = 0.90;
-          split_ratio = 0.50;
+          # window_border = "on";
+          # window_border_width = 2;
+          # active_window_border_color = colors_focused;
+          # normal_window_border_color = colors_normal;
 
+          split_ratio = 0.50;
           auto_balance = "off";
 
           mouse_modifier = "fn";
@@ -197,8 +213,6 @@
         yabai -m rule --add label='Dictionary' app='^Dictionary$' manage=off
         yabai -m rule --add label='Software Update' title='Software Update' manage=off
         yabai -m rule --add label='About This Mac' app='System Information' title='About This Mac' manage=off
-
-        yabai -m rule --add label='Slack' app='Slack' title='.*' manage=off
       '';
     };
   };
