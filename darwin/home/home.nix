@@ -17,7 +17,7 @@
       bc
       darwin.xcode_16
       docker_28
-      firefox-devedition-unwrapped
+      # firefox-devedition
       fzf
       jq
       git
@@ -99,7 +99,7 @@
 
     firefox = {
       enable = true;
-      package = pkgs.firefox-devedition-unwrapped;
+      package = pkgs.firefox-devedition;
       languagePacks = [
         "en-US"
         "de"
@@ -320,6 +320,7 @@
               # epub-reader
               # gql network inspector
             ];
+            # TODO: Extension settings
           };
         };
       };
@@ -493,7 +494,7 @@
 
     lsd = {
       enable = true;
-      enableAliases = true;
+      enableZshIntegration = true;
       # TODO: Custom colors and icons
     };
 
@@ -629,7 +630,7 @@
                 name = "oxc-vscode";
                 publisher = "oxc";
                 version = "latest";
-                sha256 = "sha256-TEZ1A4IOujNy8Wm1b4nIMvRFTYHJsAWzcpCOfHA0Mxg=";
+                sha256 = "sha256-dTwWhIKvXP6xaB88VMIaFa/bWn5BVgZzC6w+3O0dsMc=";
               }
               {
                 name = "python";
@@ -641,13 +642,13 @@
                 name = "playwright";
                 publisher = "ms-playwright";
                 version = "latest";
-                sha256 = "sha256-gSIWwD8WHKMM5wpuPpSKpBB+oxaqO2vO8wHTN43jmrM=";
+                sha256 = "sha256-OhXpqP5PX/E2125MZQVOz+kdJybh0D6DV202HL5gjO0=";
               }
               {
                 name = "code-spell-checker-british-english";
                 publisher = "streetsidesoftware";
                 version = "latest";
-                sha256 = "sha256-SjZh30guNF7MInhiysR/LyhI06XFOyyUygec5+ZvdDA=";
+                sha256 = "sha256-ERplyZ8oyXmSuEKDI8brHvFFkoxYpXuJT9lo2wD+0r4=";
               }
               {
                 name = "code-spell-checker-german";
@@ -689,7 +690,7 @@
                 name = "vscode-typescript-next";
                 publisher = "ms-vscode";
                 version = "latest";
-                sha256 = "sha256-X8ja4sACzNNhqF/v6pf6fez86Cs2WwrjE8wwMhUXL6U=";
+                sha256 = "sha256-BYDEDazMYn26qtJi+6O6/vYkkMWU8ONZHLZsNvChE+k=";
               }
               {
                 name = "react-proptypes-intellisense";
@@ -907,7 +908,7 @@
 
       # p10k config
       # you should use position after the commands output
-      initExtra = ''
+      initContent = ''
         # extra config (before aliases)
         source ~/.p10k.zsh
         export YSU_MESSAGE_POSITION="after"
@@ -1001,7 +1002,7 @@
       enableZshIntegration = true;
       defaultCacheTtl = 21600; # 6 hours
       maxCacheTtl =  86400; # 1 day
-      pinentryPackage = pkgs.pinentry-tty;
+      pinentry.package = pkgs.pinentry-tty;
     };
 
     jankyborders = {

@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-stable,
   config,
   ...
 }:
@@ -12,7 +13,7 @@
     systemPackages = with pkgs; [
       lua54Packages.lua # specific lua version for sbarlua overlay
       vim
-      devenv
+      pkgs-stable.devenv
     ];
   };
 
@@ -239,7 +240,7 @@
           "/Applications/WhatsApp.app"
           "/Applications/Slack.app"
           "/Applications/Thunderbird.app"
-          "${pkgs.firefox-devedition-unwrapped}/Applications/Firefox Developer Edition.app"
+          "${pkgs.firefox-devedition}/Applications/Firefox Developer Edition.app"
           "${pkgs.obsidian}/Applications/Obsidian.app"
           "${pkgs.vscodium}/Applications/VSCodium.app"
           "${pkgs.kitty}/Applications/kitty.app"
