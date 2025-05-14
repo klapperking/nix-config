@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-stable,
   config,
   ...
 }:
@@ -13,7 +12,7 @@
     systemPackages = with pkgs; [
       lua54Packages.lua # specific lua version for sbarlua overlay
       vim
-      pkgs-stable.devenv
+      devenv
     ];
   };
 

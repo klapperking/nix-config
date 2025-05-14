@@ -37,6 +37,7 @@
       tmux
       tmuxPlugins.tokyo-night-tmux
       tmuxPlugins.yank
+      postman
       obsidian
       vscodium
       zed-editor
@@ -99,7 +100,8 @@
 
     firefox = {
       enable = true;
-      package = pkgs.firefox-devedition;
+      # TODO: Fix profile not found issue due to wrong path with devedition
+      # package = pkgs.firefox-devedition-bin;
       languagePacks = [
         "en-US"
         "de"
