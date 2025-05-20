@@ -17,7 +17,7 @@
 
     nur.url = "github:nix-community/NUR";
 
-    mac-app-util.url = "github:hraban/mac-app-util";
+    # mac-app-util.url = "github:hraban/mac-app-util";
     sops-nix.url = "github:Mic92/sops-nix";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
@@ -48,7 +48,7 @@
       nixpkgs-stable-2411,
       home-manager,
       darwin,
-      mac-app-util,
+      # mac-app-util,
       nix-homebrew,
       ...
     }:
@@ -66,7 +66,7 @@
           };
           modules = [
             ./darwin/system/configuration.nix
-            mac-app-util.darwinModules.default
+            # mac-app-util.darwinModules.default
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
@@ -94,7 +94,7 @@
                 };
 
                 sharedModules = [
-                  mac-app-util.homeManagerModules.default
+                  # mac-app-util.homeManagerModules.default
                   inputs.sops-nix.homeManagerModules.sops
                 ];
 

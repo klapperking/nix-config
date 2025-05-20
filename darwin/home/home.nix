@@ -7,7 +7,7 @@
   home = {
     homeDirectory = "/Users/martin";
     username = "martin";
-    stateVersion = "24.05";
+    stateVersion = "24.11";
 
     # TODO: Sops
     # TODO: move dev-related packages into a dev-module and include for users
@@ -15,7 +15,10 @@
       _1password-cli
       age
       bc
+      # bitwarden-cli
+      bitwarden-desktop
       darwin.xcode_16
+      discord
       docker_28
       # firefox-devedition
       fzf
@@ -29,11 +32,13 @@
       nixd
       nixfmt-rfc-style
       pinentry-tty
+      raycast
       rectangle
       ripgrep
       sbarlua
-      sketchybar-app-font
       shellcheck
+      sketchybar-app-font
+      slack
       tmux
       tmuxPlugins.tokyo-night-tmux
       tmuxPlugins.yank
@@ -100,8 +105,7 @@
 
     firefox = {
       enable = true;
-      # TODO: Fix profile not found issue due to wrong path with devedition
-      # package = pkgs.firefox-devedition-bin;
+      # package = pkgs.firefox-devedition;
       languagePacks = [
         "en-US"
         "de"

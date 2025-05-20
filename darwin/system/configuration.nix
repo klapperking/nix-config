@@ -36,42 +36,11 @@
         greedy = true;
       }
       {
-        name = "bitwarden";
-        greedy = true;
-      }
-      {
-        name = "discord";
-        greedy = true;
-      }
-      {
-        name = "linear-linear";
-        greedy = true;
-      }
-      {
-        name = "figma";
-        greedy = true;
-      }
-      {
-        name = "google-drive";
-        greedy = true;
-        args = {
-          require_sha = false;
-        };
-      }
-      {
-        name = "orbstack";
-        greedy = true;
-      }
-      {
         name = "docker";
         greedy = true;
       }
       {
-        name = "raspberry-pi-imager";
-        greedy = true;
-      }
-      {
-        name = "slack";
+        name = "figma";
         greedy = true;
       }
       {
@@ -87,6 +56,25 @@
         args = {
           require_sha = false;
         };
+      }
+      {
+        name = "google-drive";
+        greedy = true;
+        args = {
+          require_sha = false;
+        };
+      }
+      {
+        name = "linear-linear";
+        greedy = true;
+      }
+      {
+        name = "orbstack";
+        greedy = true;
+      }
+      {
+        name = "raspberry-pi-imager";
+        greedy = true;
       }
       {
         name = "spotify";
@@ -237,12 +225,12 @@
         largesize = 54;
         persistent-apps = [
           "/Applications/WhatsApp.app"
-          "/Applications/Slack.app"
           "/Applications/Thunderbird.app"
           "${pkgs.firefox-devedition}/Applications/Firefox Developer Edition.app"
-          "${pkgs.obsidian}/Applications/Obsidian.app"
-          "${pkgs.vscodium}/Applications/VSCodium.app"
           "${pkgs.kitty}/Applications/kitty.app"
+          "${pkgs.obsidian}/Applications/Obsidian.app"
+          "${pkgs.slack}/Applications/Slack.app"
+          "${pkgs.vscodium}/Applications/VSCodium.app"
         ];
         persistent-others = [ ];
 
@@ -288,6 +276,9 @@
         TrackpadRightClick = true;
       };
     };
+
+    # FIXME: Migrate user-relevant options to home-manager / monitor where nix-darwin moves them
+    primaryUser = "martin";
 
     stateVersion = 5;
   };
