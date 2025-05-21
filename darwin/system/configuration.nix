@@ -144,11 +144,11 @@
       package = pkgs.yabai;
       config =
         let
-          gap_top = 8;
-          gap_bottom = 8;
-          gap_left = 8;
-          gap_right = 8;
-          gap_inner = 10;
+          gap_top = 4;
+          gap_bottom = 4;
+          gap_left = 4;
+          gap_right = 4;
+          gap_inner = 5;
 
           colors_preselect = "0xff9dd274";
         in
@@ -201,6 +201,7 @@
         yabai -m rule --add label='Dictionary' app='^Dictionary$' manage=off
         yabai -m rule --add label='Software Update' title='Software Update' manage=off
         yabai -m rule --add label='About This Mac' app='System Information' title='About This Mac' manage=off
+        yabai -m rule --add label='Raycast Settings' app='Raycast' title='Raycast Settings' manage=off
       '';
     };
   };
@@ -230,7 +231,6 @@
           "${pkgs.kitty}/Applications/kitty.app"
           "${pkgs.obsidian}/Applications/Obsidian.app"
           "${pkgs.slack}/Applications/Slack.app"
-          "${pkgs.vscodium}/Applications/VSCodium.app"
         ];
         persistent-others = [ ];
 

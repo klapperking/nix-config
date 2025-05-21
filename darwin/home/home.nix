@@ -323,6 +323,7 @@
               unpaywall
               to-deepl
               link-cleaner
+              youtube-recommended-videos
               # epub-reader
               # gql network inspector
             ];
@@ -1016,7 +1017,7 @@
       package = pkgs.jankyborders;
       settings = {
         style="round";
-        width=4.0;
+        width=2.0;
         hidpi="on";
         active_color="0xc0e2e2e3";
         inactive_color="0xc02c2e34";
