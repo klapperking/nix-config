@@ -7,7 +7,7 @@
   home = {
     homeDirectory = "/Users/martin";
     username = "martin";
-    stateVersion = "24.11";
+    stateVersion = "25.05";
 
     # TODO: Sops
     # TODO: move dev-related packages into a dev-module and include for users
@@ -38,7 +38,6 @@
       sbarlua
       shellcheck
       sketchybar-app-font
-      slack
       tmux
       tmuxPlugins.tokyo-night-tmux
       tmuxPlugins.yank
@@ -505,7 +504,7 @@
       # TODO: Custom colors and icons
     };
 
-    thefuck = {
+    pay-respects = {
       enable = true;
       enableZshIntegration = true;
     };
@@ -1037,6 +1036,11 @@
         lalt - 3 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[3] ]] && yabai -m space --focus $SPACES[3]
         lalt - 4 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[4] ]] && yabai -m space --focus $SPACES[4]
 
+        ralt - 1 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[1] ]] && yabai -m space --focus $SPACES[1]
+        ralt - 2 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[2] ]] && yabai -m space --focus $SPACES[2]
+        ralt - 3 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[3] ]] && yabai -m space --focus $SPACES[3]
+        ralt - 4 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[4] ]] && yabai -m space --focus $SPACES[4]
+
         # Window Navigation (through display borders): lalt - {h, j, k, ;}
         lalt - h    : yabai -m window --focus west  || yabai -m display --focus west
         lalt - j    : yabai -m window --focus south || yabai -m display --focus south
@@ -1077,6 +1081,18 @@
                           && yabai -m window --space $SPACES[3]
 
         shift + lalt - 4 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[4] ]] \
+                          && yabai -m window --space $SPACES[4]
+
+        shift + ralt - 1 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[1] ]] \
+                         && yabai -m window --space $SPACES[1]
+
+        shift + ralt - 2 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[2] ]] \
+                         && yabai -m window --space $SPACES[2]
+
+        shift + ralt - 3 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[3] ]] \
+                         && yabai -m window --space $SPACES[3]
+
+        shift + ralt - 4 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[4] ]] \
                           && yabai -m window --space $SPACES[4]
 
         shift + lalt - p : yabai -m window --space prev && yabai -m space --focus prev

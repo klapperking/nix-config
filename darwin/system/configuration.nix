@@ -65,7 +65,15 @@
         };
       }
       {
+        name = "karabiner-elements";
+        greedy = true;
+      }
+      {
         name = "linear-linear";
+        greedy = true;
+      }
+      {
+        name = "microsoft-edge";
         greedy = true;
       }
       {
@@ -74,6 +82,10 @@
       }
       {
         name = "raspberry-pi-imager";
+        greedy = true;
+      }
+      {
+        name = "slack";
         greedy = true;
       }
       {
@@ -127,11 +139,9 @@
   };
 
   services = {
-
     sketchybar = {
       enable = true;
       package = pkgs.sketchybar;
-      # ? is this even needed?
       extraPackages = [
         pkgs.jq
       ];
@@ -226,11 +236,11 @@
         largesize = 54;
         persistent-apps = [
           "/Applications/WhatsApp.app"
+          "/Applications/Slack.app"
           "/Applications/Thunderbird.app"
           "${pkgs.firefox-devedition}/Applications/Firefox Developer Edition.app"
           "${pkgs.kitty}/Applications/kitty.app"
           "${pkgs.obsidian}/Applications/Obsidian.app"
-          "${pkgs.slack}/Applications/Slack.app"
         ];
         persistent-others = [ ];
 
@@ -266,7 +276,7 @@
         NSAutomaticDashSubstitutionEnabled = false;
         NSAutomaticWindowAnimationsEnabled = false;
         "com.apple.keyboard.fnState" = true;
-        "com.apple.mouse.tapBehavior" = 1; # duplicate of trackpad.Clicking?
+        "com.apple.mouse.tapBehavior" = 1;
       };
 
       trackpad = {

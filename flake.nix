@@ -3,10 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable-2411.url = "github:NixOS/nixpkgs/release-24.11";
+    nixpkgs-stable-2505.url = "github:NixOS/nixpkgs/release-25.05";
 
     darwin = {
-      url = "github:lnl7/nix-darwin";
+      url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -17,7 +17,7 @@
 
     nur.url = "github:nix-community/NUR";
 
-    # mac-app-util.url = "github:hraban/mac-app-util";
+    mac-app-util.url = "github:hraban/mac-app-util";
     sops-nix.url = "github:Mic92/sops-nix";
 
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
@@ -45,10 +45,10 @@
   outputs =
     inputs@{
       nixpkgs,
-      nixpkgs-stable-2411,
+      nixpkgs-stable-2505,
       home-manager,
       darwin,
-      # mac-app-util,
+      mac-app-util,
       nix-homebrew,
       ...
     }:
@@ -58,7 +58,7 @@
         pro = darwin.lib.darwinSystem rec {
           system = "aarch64-darwin";
           specialArgs = {
-            pkgs-stable = import nixpkgs-stable-2411 {
+            pkgs-stable = import nixpkgs-stable-2505 {
               inherit system;
               # TODO: Move this to configuration.nix?
               config.allowUnfree = true;
@@ -66,7 +66,7 @@
           };
           modules = [
             ./darwin/system/configuration.nix
-            # mac-app-util.darwinModules.default
+            mac-app-util.darwinModules.default
             nix-homebrew.darwinModules.nix-homebrew
             {
               nix-homebrew = {
