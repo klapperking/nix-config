@@ -13,6 +13,7 @@
       lua54Packages.lua # specific lua version for sbarlua overlay
       vim
       devenv
+      keepassxc
     ];
   };
 

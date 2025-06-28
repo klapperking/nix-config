@@ -15,6 +15,7 @@
       _1password-cli
       age
       bc
+      btop
       # bitwarden-cli
       bitwarden-desktop
       darwin.xcode_16
@@ -420,7 +421,6 @@
           condition = "gitdir:~/code/ax/";
         }
       ];
-
     };
 
     gh = {
@@ -636,7 +636,7 @@
                 name = "oxc-vscode";
                 publisher = "oxc";
                 version = "latest";
-                sha256 = "sha256-dTwWhIKvXP6xaB88VMIaFa/bWn5BVgZzC6w+3O0dsMc=";
+                sha256 = "sha256-CGg2be6v+tV9PKUNbrpsXYjri+ZAWx9CWbmRwa92er4=";
               }
               {
                 name = "python";
@@ -648,13 +648,13 @@
                 name = "playwright";
                 publisher = "ms-playwright";
                 version = "latest";
-                sha256 = "sha256-OhXpqP5PX/E2125MZQVOz+kdJybh0D6DV202HL5gjO0=";
+                sha256 = "sha256-1fdUyzJitFfl/cVMOjEiuBS/+FTGttilXoZ8txZMmVs=";
               }
               {
                 name = "code-spell-checker-british-english";
                 publisher = "streetsidesoftware";
                 version = "latest";
-                sha256 = "sha256-ERplyZ8oyXmSuEKDI8brHvFFkoxYpXuJT9lo2wD+0r4=";
+                sha256 = "sha256-+D+gFnwQqCClsAx7PYdj9lFBmQLyv0NzaEbB+TWjlNI=";
               }
               {
                 name = "code-spell-checker-german";
@@ -696,7 +696,7 @@
                 name = "vscode-typescript-next";
                 publisher = "ms-vscode";
                 version = "latest";
-                sha256 = "sha256-BYDEDazMYn26qtJi+6O6/vYkkMWU8ONZHLZsNvChE+k=";
+                sha256 = "sha256-vuoBkMHr2XSSs8Bwlua/tm66mIIsy3jVAVtz7I+F1vo=";
               }
               {
                 name = "react-proptypes-intellisense";
