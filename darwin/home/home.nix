@@ -34,7 +34,6 @@
       nixfmt-rfc-style
       pinentry-tty
       raycast
-      rectangle
       ripgrep
       sbarlua
       shellcheck
@@ -56,33 +55,6 @@
       # use fake omz cache dir for completions
       ZSH_CACHE_DIR = "${config.home.homeDirectory}/.cache/oh-my-zsh";
     };
-
-    # TODO: move to other place, so actual lua config can be included?
-    # file = {
-    #   ".config/sketchybar" = {
-    #     source = builtins.path { path = ./sketchybar; };
-    #     recursive = true;
-    #     onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
-    #   };
-
-    #   ".local/share/sketchybar_lua/sketchybar.so" = {
-    #     source = "${pkgs.sbarlua}/lib/sketchybar.so";
-    #     onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
-    #   };
-
-    #   # TODO: Fetch / Copy these from sketchybar example config into this repo! (bar now is empty)
-    #   ".config/sketchybar/sketchybarrc" = {
-    #     text = ''
-    #         #!/usr/bin/env ${pkgs.lua54Packages.lua}/bin/lua
-    #         package.path = "./sketchybar/?.lua;./sketchybar/?/init.lua;" .. package.path
-    #         -- Load the sketchybar-package and prepare the helper binaries
-    #         require("helpers")
-    #         require("init")
-    #     '';
-    #     executable = true;
-    #     onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
-    #   };
-    # };
   };
 
   programs = {
