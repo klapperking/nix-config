@@ -37,10 +37,6 @@
         greedy = true;
       }
       {
-        name = "docker";
-        greedy = true;
-      }
-      {
         name = "figma";
         greedy = true;
       }
@@ -92,6 +88,9 @@
       {
         name = "spotify";
         greedy = true;
+        args = {
+          require_sha = false;
+        };
       }
       {
         name = "thunderbird";

@@ -20,7 +20,7 @@
       bitwarden-desktop
       darwin.xcode_16
       discord
-      docker_28
+      docker
       # firefox-devedition
       fzf
       jq
@@ -50,8 +50,8 @@
     ];
 
     sessionVariables = {
-      TERMINAL      = "kitty";
-      EDITOR        = "zed";
+      TERMINAL = "kitty";
+      EDITOR = "zeditor";
       # use fake omz cache dir for completions
       ZSH_CACHE_DIR = "${config.home.homeDirectory}/.cache/oh-my-zsh";
     };
@@ -979,7 +979,7 @@
       enable = true;
       enableZshIntegration = true;
       defaultCacheTtl = 21600; # 6 hours
-      maxCacheTtl =  86400; # 1 day
+      maxCacheTtl = 86400; # 1 day
       pinentry.package = pkgs.pinentry-tty;
     };
 
@@ -987,12 +987,12 @@
       enable = true;
       package = pkgs.jankyborders;
       settings = {
-        style="round";
-        width=2.0;
-        hidpi="on";
-        active_color="0xc0e2e2e3";
-        inactive_color="0xc02c2e34";
-        background_color="0x302c2e34";
+        style = "round";
+        width = 2.0;
+        hidpi = "on";
+        active_color = "0xc0e2e2e3";
+        inactive_color = "0xc02c2e34";
+        background_color = "0x302c2e34";
       };
     };
 
