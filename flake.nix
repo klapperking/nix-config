@@ -15,17 +15,31 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nur.url = "github:nix-community/NUR";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    mac-app-util.url = "github:hraban/mac-app-util";
-    sops-nix.url = "github:Mic92/sops-nix";
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+
+    };
+
+    nix-homebrew = {
+      url = "github:zhaofengli-wip/nix-homebrew";
+    };
 
     homebrew-bundle = {
       url = "github:homebrew/homebrew-bundle";
       flake = false;
     };
+
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
       flake = false;
@@ -55,7 +69,7 @@
     {
       formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-rfc-style;
       darwinConfigurations = {
-        pro = darwin.lib.darwinSystem rec {
+        "mb-pro" = darwin.lib.darwinSystem rec {
           system = "aarch64-darwin";
           specialArgs = {
             pkgs-stable = import nixpkgs-stable-2505 {
@@ -73,7 +87,6 @@
                 enable = true;
                 enableRosetta = true;
                 user = "martin";
-                autoMigrate = true;
                 taps = {
                   "homebrew/homebrew-bundle" = inputs.homebrew-bundle;
                   "homebrew/homebrew-core" = inputs.homebrew-core;
@@ -94,7 +107,7 @@
                 };
 
                 sharedModules = [
-                  # mac-app-util.homeManagerModules.default
+                  mac-app-util.homeManagerModules.default
                   inputs.sops-nix.homeManagerModules.sops
                 ];
 
