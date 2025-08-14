@@ -15,10 +15,10 @@
       _1password-cli
       age
       bc
-      btop
       # bitwarden-cli
       bitwarden-desktop
       darwin.xcode_16
+      claude-code
       discord
       docker
       # firefox-devedition
@@ -43,6 +43,7 @@
       tmuxPlugins.yank
       postman
       obsidian
+      opencode
       vscodium
       zed-editor
       zsh
@@ -62,6 +63,11 @@
 
     bash = {
       enable = true;
+    };
+
+    btop = {
+      enable = true;
+      # TODO: settings = {};
     };
 
     chromium = {
@@ -284,11 +290,13 @@
               bitwarden
               canvasblocker
               darkreader
+              dearrow
               decentraleyes
               onepassword-password-manager
               privacy-badger
               react-devtools
               reduxdevtools
+              sponsorblock
               tokyo-night-v2
               ublock-origin
               user-agent-string-switcher
@@ -360,7 +368,7 @@
           ui = true;
         };
         core = {
-          editor = "zed --wait";
+          editor = "zeditor --wait";
           pager = "less -FRSX";
         };
         help = {
@@ -476,6 +484,11 @@
       # TODO: Custom colors and icons
     };
 
+    neovim = {
+      enable = true;
+      vimAlias = true;
+    };
+
     pay-respects = {
       enable = true;
       enableZshIntegration = true;
@@ -558,8 +571,9 @@
               # golang
               golang.go
 
+              # TODO: Re-enable when updated to sha match
               # rust
-              rust-lang.rust-analyzer
+              # rust-lang.rust-analyzer
 
               # gql
               graphql.vscode-graphql
@@ -605,10 +619,16 @@
                 sha256 = "sha256-ExeerCI5yDa/DJqNOwENDjw+xhMPNil6JgCAUNdTXy8=";
               }
               {
+                name = "rust-analyzer";
+                publisher = "rust-lang";
+                version = "latest";
+                sha256 = "sha256-CBZ3lBLb8vuxF9vIP9+uv2raNwEEMh4YEDLtWpQ4Cg4=";
+              }
+              {
                 name = "oxc-vscode";
                 publisher = "oxc";
                 version = "latest";
-                sha256 = "sha256-CGg2be6v+tV9PKUNbrpsXYjri+ZAWx9CWbmRwa92er4=";
+                sha256 = "sha256-KU0P2XQur2Z1EA4Ujmzdl6AEiM9BETV9XdH4GCL/gWw=";
               }
               {
                 name = "python";
@@ -626,7 +646,7 @@
                 name = "code-spell-checker-british-english";
                 publisher = "streetsidesoftware";
                 version = "latest";
-                sha256 = "sha256-+D+gFnwQqCClsAx7PYdj9lFBmQLyv0NzaEbB+TWjlNI=";
+                sha256 = "sha256-iAqne46kWBXp82eXKNq/Yikpgg9w5BbnlxzFRlSvC+A=";
               }
               {
                 name = "code-spell-checker-german";
@@ -668,7 +688,7 @@
                 name = "vscode-typescript-next";
                 publisher = "ms-vscode";
                 version = "latest";
-                sha256 = "sha256-vuoBkMHr2XSSs8Bwlua/tm66mIIsy3jVAVtz7I+F1vo=";
+                sha256 = "sha256-4YM7NnmaE4C/ae5oHd4TtIgVVBalYfaKXpok1GdXti0=";
               }
               {
                 name = "react-proptypes-intellisense";
@@ -686,7 +706,7 @@
                 name = "vscode-expo-tools";
                 publisher = "expo";
                 version = "latest";
-                sha256 = "sha256-on+QlNwHQzmBBDYkRWJ2hVMuW+xLhJHx7Og6tuR2nMo=";
+                sha256 = "sha256-qNgidCb8D13coJkykgwViSuMNxXaqitkN3VRKLS3LWk=";
               }
             ];
 
@@ -988,7 +1008,7 @@
       package = pkgs.jankyborders;
       settings = {
         style = "round";
-        width = 2.0;
+        width = 1.0;
         hidpi = "on";
         active_color = "0xc0e2e2e3";
         inactive_color = "0xc02c2e34";
@@ -1108,7 +1128,7 @@
 
         # New window in hor./ vert. splits for all applications with yabai
         lalt - s : yabai -m window --insert east;  skhd -k "cmd - n"
-        lalt - v : yabai -m window --insert south; skhd -k "cmd - n"
+        lalt - v : ya4bai -m window --insert south; skhd -k "cmd - n"
 
         # Toggle sketchybar
         shift + lalt - space : sketchybar --bar hidden=toggle

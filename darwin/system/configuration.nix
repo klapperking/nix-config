@@ -74,6 +74,13 @@
         greedy = true;
       }
       {
+        name = "nvidia-geforce-now";
+        greedy = true;
+        args = {
+          require_sha = false;
+        };
+      }
+      {
         name = "orbstack";
         greedy = true;
       }
@@ -154,11 +161,11 @@
       package = pkgs.yabai;
       config =
         let
-          gap_top = 4;
-          gap_bottom = 4;
-          gap_left = 4;
-          gap_right = 4;
-          gap_inner = 5;
+          gap_top = 1;
+          gap_bottom = 2;
+          gap_left = 2;
+          gap_right = 2;
+          gap_inner = 2;
 
           colors_preselect = "0xff9dd274";
         in
@@ -180,18 +187,8 @@
           focus_follows_mouse = "off";
 
           window_opacity = "off";
-          # window_opacity_duration = 0.2;
-          # active_window_opacity = 1.0;
-          # normal_window_opacity = 0.80;
-          # window_animation_duration = 0.5;
-          # window_animation_easing = "ease_out_quint";
 
           insert_feedback_color = colors_preselect;
-
-          # window_border = "on";
-          # window_border_width = 2;
-          # active_window_border_color = colors_focused;
-          # normal_window_border_color = colors_normal;
 
           split_ratio = 0.50;
           auto_balance = "off";
@@ -218,8 +215,8 @@
 
   system = {
     activationScripts = {
-      # rosetta to run x86 on silicon
-      extraActivation.text = ''
+      postActivation.text = ''
+        # rosetta to run x86 on silicon
         softwareupdate --install-rosetta --agree-to-license
       '';
     };
