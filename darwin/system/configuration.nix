@@ -10,6 +10,7 @@
     # symlink system packages to home manager zsh for completion access
     pathsToLink = [ "/share/zsh/" ];
     systemPackages = with pkgs; [
+      sbarlua
       lua54Packages.lua # specific lua version for sbarlua overlay
       vim
       devenv

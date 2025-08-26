@@ -48,12 +48,6 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-
-    # too lazy to make actual own derivation, all credits to: https://github.com/Lalit64 &  https://github.com:gangjun06
-    sbarlua = {
-      url = "github:lalit64/SbarLua/nix-darwin-package";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -99,7 +93,6 @@
             {
               nixpkgs.overlays = [
                 inputs.nur.overlays.default
-                inputs.sbarlua.overlay
               ];
               home-manager = {
                 extraSpecialArgs = {

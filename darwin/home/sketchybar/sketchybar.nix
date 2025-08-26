@@ -10,7 +10,7 @@
       onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
     };
     ".local/share/sketchybar_lua/sketchybar.so" = {
-      source = "${pkgs.sbarlua}/lib/sketchybar.so";
+      source = "${pkgs.sbarlua}/lib/lua/${pkgs.lua54Packages.lua.luaversion}/sketchybar.so";
       onChange = "${pkgs.sketchybar}/bin/sketchybar --reload";
     };
     ".config/sketchybar/sketchybarrc" = {
