@@ -236,7 +236,7 @@
           "/Applications/WhatsApp.app"
           "/Applications/Slack.app"
           "/Applications/Thunderbird.app"
-          "${pkgs.firefox-devedition}/Applications/Firefox Developer Edition.app"
+          # "${pkgs.firefox-devedition}/Applications/Firefox Developer Edition.app"
           "${pkgs.kitty}/Applications/kitty.app"
           "${pkgs.obsidian}/Applications/Obsidian.app"
         ];
