@@ -328,6 +328,9 @@
         dt = "difftool";
         stat = "!git --no-pager diff --stat";
 
+        # display list of tags with information about ref, author, subject
+        taglist = "!git for-each-ref --format='%(refname:short) %(objectname:short) %(authordate:short) %(contents:subject)' refs/tags";
+
         # Set remotes/origin/HEAD -> defaultBranch (copied from https://stackoverflow.com/a/67672350/14870317)
         remoteSetHead = "remote set-head origin --auto";
 
