@@ -38,6 +38,10 @@
         greedy = true;
       }
       {
+        name = "balenaetcher";
+        greedy = true;
+      }
+      {
         name = "figma";
         greedy = true;
       }
