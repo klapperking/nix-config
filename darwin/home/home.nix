@@ -18,33 +18,44 @@
       # bitwarden-cli
       bitwarden-desktop
       darwin.xcode_16
+      discordo
       claude-code
       discord
       docker
+      harlequin
       # firefox-devedition
       fzf
+      fx
       jq
+      gdu
       git
       gh-eco
       gnupg
       google-chrome
       kitty
       meslo-lgs-nf
+      mqttui
+      mutt
       nixd
       nixfmt-rfc-style
       pinentry-tty
-      raycast
+      rainfrog
       ripgrep
+      raycast
       sbarlua
       shellcheck
       sketchybar-app-font
       tmux
       tmuxPlugins.tokyo-night-tmux
       tmuxPlugins.yank
+      ttyper
+      typtea
       postman
       obsidian
       opencode
       vscodium
+      watchman
+      yazi
       zed-editor
       zsh
       zsh-powerlevel10k
@@ -83,7 +94,6 @@
 
     firefox = {
       enable = true;
-      # package = pkgs.firefox-devedition;
       languagePacks = [
         "en-US"
         "de"
@@ -321,45 +331,51 @@
     };
 
     git = {
-      aliases = {
-        st = "status -sb";
-        fo = "fetch origin";
-        d = "!git --no-pager diff";
-        dt = "difftool";
-        stat = "!git --no-pager diff --stat";
-
-        # display list of tags with information about ref, author, subject
-        taglist = "!git for-each-ref --format='%(refname:short) %(objectname:short) %(authordate:short) %(contents:subject)' refs/tags";
-
-        # Set remotes/origin/HEAD -> defaultBranch (copied from https://stackoverflow.com/a/67672350/14870317)
-        remoteSetHead = "remote set-head origin --auto";
-
-        # Get default branch name (copied from https://stackoverflow.com/a/67672350/14870317)
-        defaultBranch = "!git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4";
-
-        # Clean merged branches (adapted from https://stackoverflow.com/a/6127884/14870317)
-        sweep = "!git branch --merged $(git defaultBranch) | grep -E -v ' $(git defaultBranch)$' | xargs -r git branch -d && git remote prune origin";
-
-        # http://www.jukie.net/bart/blog/pimping-out-git-log
-        lg = "log --graph --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset'";
-
-        # Serve local repo. http://coderwall.com/p/eybtga
-        # Then other can access via `git clone git://#{YOUR_IP_ADDRESS}/
-        serve = "!git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git";
-
-        # Checkout to defaultBranch
-        m = "!git checkout $(git defaultBranch)";
-
-        # Removes a file from the index
-        unstage = "reset HEAD --";
-      };
       enable = true;
-      extraConfig = {
+      signing = {
+        key = null;
+        signByDefault = true;
+      };
+      settings = {
+        aliases = {
+          st = "status -sb";
+          fo = "fetch origin";
+          d = "!git --no-pager diff";
+          dt = "difftool";
+          stat = "!git --no-pager diff --stat";
+
+          # display list of tags with information about ref, author, subject
+          taglist = "!git for-each-ref --format='%(refname:short) %(objectname:short) %(authordate:short) %(contents:subject)' refs/tags";
+
+          # Set remotes/origin/HEAD -> defaultBranch (copied from https://stackoverflow.com/a/67672350/14870317)
+          remoteSetHead = "remote set-head origin --auto";
+
+          # Get default branch name (copied from https://stackoverflow.com/a/67672350/14870317)
+          defaultBranch = "!git symbolic-ref refs/remotes/origin/HEAD | cut -d'/' -f4";
+
+          # Clean merged branches (adapted from https://stackoverflow.com/a/6127884/14870317)
+          sweep = "!git branch --merged $(git defaultBranch) | grep -E -v ' $(git defaultBranch)$' | xargs -r git branch -d && git remote prune origin";
+
+          # http://www.jukie.net/bart/blog/pimping-out-git-log
+          lg = "log --graph --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset'";
+
+          # Serve local repo. http://coderwall.com/p/eybtga
+          # Then other can access via `git clone git://#{YOUR_IP_ADDRESS}/
+          serve = "!git daemon --reuseaddr --verbose  --base-path=. --export-all ./.git";
+
+          # Checkout to defaultBranch
+          m = "!git checkout $(git defaultBranch)";
+
+          # Removes a file from the index
+          unstage = "reset HEAD --";
+        };
+
         branch = {
           master = {
             mergeoptions = "--no-edit";
           };
         };
+
         color = {
           branch = {
             current = "green";
@@ -370,33 +386,38 @@
           status = true;
           ui = true;
         };
+
         core = {
           editor = "zeditor --wait";
           pager = "less -FRSX";
         };
+
         help = {
           autocorrect = 1;
         };
+
         init = {
           defaultBranch = "main";
         };
+
         pull = {
           rebase = "true";
         };
+
         push = {
           default = "simple";
           autoSetupRemote = true;
         };
+
         rerere = {
           enabled = true;
         };
+
+        user = {
+          name = "Martin Klapper";
+          email = "64156820+klapperking@users.noreply.github.com";
+        };
       };
-      signing = {
-        key = null;
-        signByDefault = true;
-      };
-      userName = "Martin Klapper";
-      userEmail = "64156820+klapperking@users.noreply.github.com";
 
       includes = [
         {
@@ -504,6 +525,9 @@
       extraConfig = ''
         # Allow x-keys (like C-left to move by full word)
         set-option -g xterm-keys on
+
+        # use vi key in copy mode
+        setw -g mode-keys vi
 
         # bind ctrl + Arrowkeys to navigate in cli
         bind -n M-Left send-keys M-b
@@ -619,19 +643,19 @@
                 name = "sqltools";
                 publisher = "mtxr";
                 version = "latest";
-                sha256 = "sha256-ExeerCI5yDa/DJqNOwENDjw+xhMPNil6JgCAUNdTXy8=";
+                sha256 = "sha256-2JgBRMaNU3einOZ0POfcc887HCScu6myETTLoJMS6o8=";
               }
               {
                 name = "rust-analyzer";
                 publisher = "rust-lang";
                 version = "latest";
-                sha256 = "sha256-CBZ3lBLb8vuxF9vIP9+uv2raNwEEMh4YEDLtWpQ4Cg4=";
+                sha256 = "sha256-HwELyT9Rq96w90IvAXB4u0EUvd0D7HArWuKtYeaOOKs=";
               }
               {
                 name = "oxc-vscode";
                 publisher = "oxc";
                 version = "latest";
-                sha256 = "sha256-KU0P2XQur2Z1EA4Ujmzdl6AEiM9BETV9XdH4GCL/gWw=";
+                sha256 = "sha256-Vabz0/NDhh09nxFSRqGk+/eRVCNXw6sOrSu9qIm9j9A=";
               }
               {
                 name = "python";
@@ -643,13 +667,13 @@
                 name = "playwright";
                 publisher = "ms-playwright";
                 version = "latest";
-                sha256 = "sha256-1fdUyzJitFfl/cVMOjEiuBS/+FTGttilXoZ8txZMmVs=";
+                sha256 = "sha256-t5PJtBDkjh80IhOpfjsX8kZCSfhGoQ1dePEYMYgw66c=";
               }
               {
                 name = "code-spell-checker-british-english";
                 publisher = "streetsidesoftware";
                 version = "latest";
-                sha256 = "sha256-iAqne46kWBXp82eXKNq/Yikpgg9w5BbnlxzFRlSvC+A=";
+                sha256 = "sha256-j/XdeswdXWnkY/LhDwkdkFmn2sICSRnAHcUCoGPlPGc=";
               }
               {
                 name = "code-spell-checker-german";
@@ -691,7 +715,7 @@
                 name = "vscode-typescript-next";
                 publisher = "ms-vscode";
                 version = "latest";
-                sha256 = "sha256-4YM7NnmaE4C/ae5oHd4TtIgVVBalYfaKXpok1GdXti0=";
+                sha256 = "sha256-6xsmmMfd9XppkvuEp5vWoTLvlRTH74t37+8ZPVmSsx4=";
               }
               {
                 name = "react-proptypes-intellisense";
