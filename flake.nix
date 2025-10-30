@@ -22,7 +22,8 @@
 
     mac-app-util = {
       url = "github:hraban/mac-app-util";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # FIXME: move to unstable again, once lisp test is fixed for darwin (merged already)
+      inputs.nixpkgs.follows = "nixpkgs-stable-2505";
     };
 
     sops-nix = {
