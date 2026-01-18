@@ -11,7 +11,7 @@
     pathsToLink = [ "/share/zsh/" ];
     systemPackages = with pkgs; [
       sbarlua
-      lua54Packages.lua # specific lua version for sbarlua overlay
+      lua54Packages.lua
       vim
       devenv
       keepassxc
@@ -154,9 +154,7 @@
     sketchybar = {
       enable = true;
       package = pkgs.sketchybar;
-      extraPackages = [
-        pkgs.jq
-      ];
+      extraPackages = [ pkgs.jq ];
     };
 
     yabai = {

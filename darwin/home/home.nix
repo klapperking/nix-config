@@ -41,21 +41,22 @@
       mutt
       nixd
       nixfmt-rfc-style
+      obsidian
+      opencode
       pinentry-tty
+      postman
       rainfrog
       ripgrep
       raycast
       sbarlua
       shellcheck
       sketchybar-app-font
+      lua54Packages.lua
       tmux
       tmuxPlugins.tokyo-night-tmux
       tmuxPlugins.yank
       ttyper
-      typtea
-      postman
-      obsidian
-      opencode
+      # typtea - package not available
       vscodium
       watchman
       yazi

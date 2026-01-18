@@ -23,7 +23,6 @@
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-
     };
 
     nix-homebrew = {
@@ -39,6 +38,7 @@
       url = "github:homebrew/homebrew-core";
       flake = false;
     };
+
     homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
       flake = false;
@@ -55,14 +55,13 @@
       ...
     }:
     {
-      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-rfc-style;
+      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt;
       darwinConfigurations = {
         "mb-pro" = darwin.lib.darwinSystem rec {
           system = "aarch64-darwin";
           specialArgs = {
             pkgs-stable = import nixpkgs-stable-2505 {
               inherit system;
-              # TODO: Move this to configuration.nix?
               config.allowUnfree = true;
             };
           };
