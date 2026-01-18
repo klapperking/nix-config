@@ -1,0 +1,60 @@
+{
+  pkgs,
+  ...
+}:
+{
+  home.packages = with pkgs; [
+    _1password-cli
+    age
+    bat
+    bc
+    # bitwarden-cli
+    bitwarden-desktop
+    darwin.xcode_16
+    discordo
+    claude-code
+    discord
+    docker
+    harlequin
+    # firefox-devedition
+    fzf
+    fx
+    jq
+    gdu
+    git
+    gh-eco
+    gnupg
+    google-chrome
+    google-cloud-sdk
+    hyperfine
+    kitty
+    meslo-lgs-nf
+    mqttui
+    mutt
+    nixd
+    nixfmt
+    obsidian
+    opencode
+    pinentry-tty
+    postman
+    rainfrog
+    ripgrep
+    raycast
+    sbarlua
+    shellcheck
+    sketchybar-app-font
+    speedtest-cli
+    lua54Packages.lua
+    tmux
+    tmuxPlugins.tokyo-night-tmux
+    tmuxPlugins.yank
+    ttyper
+    # typtea - package not available
+    vscodium
+    watchman
+    yazi
+    zed-editor
+    zsh
+    zsh-powerlevel10k
+  ];
+}

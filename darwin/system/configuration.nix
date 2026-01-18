@@ -117,9 +117,9 @@
     masApps = { };
     whalebrews = [ ];
     onActivation = {
-      autoUpdate = true;
+      autoUpdate = false;
       cleanup = "zap";
-      upgrade = true;
+      upgrade = false;
     };
   };
 
