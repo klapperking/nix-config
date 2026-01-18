@@ -202,6 +202,10 @@
         };
       # TODO: update these rules to actually match correctly + figure out default float positions (center + size)
       extraConfig = ''
+        # Load the scripting addition (requires enableScriptingAddition = true)
+        sudo yabai --load-sa
+        yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
         yabai -m rule --add label='Finder' app='^Finder$' title='(Co(py|nnect)|Move|Info|Pref)' manage=off
         yabai -m rule --add label='Safari' app='^Safari$' title='^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$' manage=off
         yabai -m rule --add label='System Settings' app='^System Settings$' title='.*' manage=off
