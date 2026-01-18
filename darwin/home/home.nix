@@ -14,6 +14,7 @@
     packages = with pkgs; [
       _1password-cli
       age
+      bat
       bc
       # bitwarden-cli
       bitwarden-desktop
@@ -33,6 +34,7 @@
       gnupg
       google-chrome
       google-cloud-sdk
+      hyperfine
       kitty
       meslo-lgs-nf
       mqttui
