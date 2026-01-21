@@ -109,6 +109,12 @@
               sha256 = "sha256-8ZOpQiEPrBTHiXjXbSfuWfR6L0cS0sWOUo9R8zgckY4=";
             }
             {
+              name = "debugpy";
+              publisher = "ms-python";
+              version = "latest";
+              sha256 = "sha256-nAGGlCYCLskgZWi5lWN8t6F2LxQ7hPCbtlZH8k23tms=";
+            }
+            {
               name = "playwright";
               publisher = "ms-playwright";
               version = "latest";
