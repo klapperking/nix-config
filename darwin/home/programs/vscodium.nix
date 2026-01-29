@@ -94,25 +94,25 @@
               name = "rust-analyzer";
               publisher = "rust-lang";
               version = "latest";
-              sha256 = "sha256-at05EA/DuX4QuhUX1/mcOyksrYlY5sHmAeAHjh5i0AY=";
+              sha256 = "sha256-QI2T463VgwTuclYrD7OXnCGQrAOTE9AVO+s224oYl/s=";
             }
             {
               name = "oxc-vscode";
               publisher = "oxc";
               version = "latest";
-              sha256 = "sha256-IO9qp7lJ5N44neBIxfId4rtE+R0fb7AJxv0QJFUSuGU=";
+              sha256 = "sha256-1dRxYDEdUAuEm55DCoZMsUCkaO3o1Qt3xQIfwz36Sp4=";
             }
             {
               name = "python";
               publisher = "ms-python";
               version = "latest";
-              sha256 = "sha256-8ZOpQiEPrBTHiXjXbSfuWfR6L0cS0sWOUo9R8zgckY4=";
+              sha256 = "sha256-xCMeiGcV7eK6sjD9Hh1PBoIqhoMAvE+S0fwh5M5QmWs=";
             }
             {
               name = "debugpy";
               publisher = "ms-python";
               version = "latest";
-              sha256 = "sha256-nAGGlCYCLskgZWi5lWN8t6F2LxQ7hPCbtlZH8k23tms=";
+              sha256 = "sha256-GzWAFDvfRuVi+CRsnqLRf9eNLj1aNQJbxRKm/+4Ikbg=";
             }
             {
               name = "playwright";
@@ -124,7 +124,7 @@
               name = "code-spell-checker-british-english";
               publisher = "streetsidesoftware";
               version = "latest";
-              sha256 = "sha256-A7pp3aLvK5Vaw7ecbqxlHxmKgG2ATuIGUVGxf06EbWY=";
+              sha256 = "sha256-jmouiKpmbm1cWxwtRKSr73R+fVt+GdBAkBD7MogVKPA=";
             }
             {
               name = "code-spell-checker-german";
@@ -166,7 +166,7 @@
               name = "vscode-typescript-next";
               publisher = "ms-vscode";
               version = "latest";
-              sha256 = "sha256-remnlMxY6EEgI+JheyiYQlvxjNfcH8qptDOL3aGG+ew=";
+              sha256 = "sha256-bKLPYfOEHs2lesF+PzA/0S36Jq5Eu+w/RzSiPWZn3Wo=";
             }
             {
               name = "react-proptypes-intellisense";
@@ -178,7 +178,7 @@
               name = "shellcheck";
               publisher = "timonwong";
               version = "latest";
-              sha256 = "sha256-/wpeKat/ndv9INDTvluxp+07QxaDLuZyJRv5o+2ngs4=";
+              sha256 = "sha256-BhwGJJTqC10V45M2vNZoOcp+PRpX9zJYcrW1wxMR4NE=";
             }
             {
               name = "vscode-expo-tools";
