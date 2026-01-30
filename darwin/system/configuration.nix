@@ -34,10 +34,6 @@
         greedy = true;
       }
       {
-        name = "aircall";
-        greedy = true;
-      }
-      {
         name = "balenaetcher";
         greedy = true;
       }
