@@ -111,7 +111,6 @@
     ];
 
     masApps = { };
-    whalebrews = [ ];
     onActivation = {
       autoUpdate = false;
       cleanup = "zap";

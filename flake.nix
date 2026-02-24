@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable-2505.url = "github:NixOS/nixpkgs/release-25.05";
+    nixpkgs-stable-2511.url = "github:NixOS/nixpkgs/release-25.11";
 
     darwin = {
       url = "github:nix-darwin/nix-darwin/master";
@@ -48,7 +48,7 @@
   outputs =
     inputs@{
       nixpkgs,
-      nixpkgs-stable-2505,
+      nixpkgs-stable-2511,
       home-manager,
       darwin,
       nix-homebrew,
@@ -60,7 +60,7 @@
         "mb-pro" = darwin.lib.darwinSystem rec {
           system = "aarch64-darwin";
           specialArgs = {
-            pkgs-stable = import nixpkgs-stable-2505 {
+            pkgs-stable = import nixpkgs-stable-2511 {
               inherit system;
               config.allowUnfree = true;
             };

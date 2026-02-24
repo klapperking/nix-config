@@ -52,7 +52,6 @@
     # typtea - package not available
     vscodium
     watchman
-    yazi
     zed-editor
     zsh
     zsh-powerlevel10k
