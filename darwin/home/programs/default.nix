@@ -7,6 +7,7 @@
     ./firefox.nix
     ./git.nix
     ./kitty.nix
+    ./mpv.nix
     ./tmux.nix
     ./vscodium.nix
     ./zsh.nix
