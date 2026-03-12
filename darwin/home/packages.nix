@@ -15,7 +15,6 @@
     claude-code
     discord
     docker
-    harlequin
     # firefox-devedition
     fzf
     fx
@@ -33,6 +32,7 @@
     mutt
     nixd
     nixfmt
+    nmap
     obsidian
     opencode
     pinentry-tty
