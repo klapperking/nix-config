@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-stable,
   config,
   ...
 }:
@@ -13,7 +14,7 @@
       sbarlua
       lua54Packages.lua
       vim
-      devenv
+      pkgs-stable.devenv
       keepassxc
     ];
   };
