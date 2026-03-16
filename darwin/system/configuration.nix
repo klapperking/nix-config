@@ -14,7 +14,7 @@
       sbarlua
       lua54Packages.lua
       vim
-      pkgs-stable.devenv
+      devenv
       keepassxc
     ];
   };
@@ -151,6 +151,11 @@
       enable = true;
       package = pkgs.sketchybar;
       extraPackages = [ pkgs.jq ];
+    };
+
+    tailscale = {
+      enable = true;
+      # extraDaemonFlags = [ "--no-logs-no-support" ];
     };
 
     yabai = {

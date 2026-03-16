@@ -27,6 +27,7 @@
     google-cloud-sdk
     hyperfine
     kitty
+    lua54Packages.lua
     meslo-lgs-nf
     mqttui
     mutt
@@ -44,12 +45,11 @@
     shellcheck
     sketchybar-app-font
     speedtest-cli
-    lua54Packages.lua
+    tailscale
     tmux
     tmuxPlugins.tokyo-night-tmux
     tmuxPlugins.yank
     ttyper
-    # typtea - package not available
     vscodium
     watchman
     zed-editor
