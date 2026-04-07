@@ -27,7 +27,6 @@
     google-cloud-sdk
     hyperfine
     kitty
-    lua54Packages.lua
     meslo-lgs-nf
     mqttui
     mutt

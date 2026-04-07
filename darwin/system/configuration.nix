@@ -12,7 +12,6 @@
     pathsToLink = [ "/share/zsh/" ];
     systemPackages = with pkgs; [
       sbarlua
-      lua54Packages.lua
       vim
       devenv
       keepassxc
