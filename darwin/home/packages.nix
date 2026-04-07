@@ -38,6 +38,7 @@
     opencode
     pinentry-tty
     postman
+    prismlauncher
     rainfrog
     ripgrep
     raycast
