@@ -4,9 +4,8 @@
 }:
 {
   # TODO: Don't search for updates.
-  programs.vscode = {
+  programs.vscodium = {
     enable = true;
-    package = pkgs.vscodium;
 
     # TODO: Fix the extension change conflicts when mutable dir is enabled
     mutableExtensionsDir = false;

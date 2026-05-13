@@ -35,6 +35,7 @@
     nmap
     obsidian
     opencode
+    osu-lazer-bin
     pinentry-tty
     postman
     prismlauncher
@@ -46,6 +47,7 @@
     sketchybar-app-font
     speedtest-cli
     tailscale
+    telegram-desktop
     tmux
     tmuxPlugins.tokyo-night-tmux
     tmuxPlugins.yank
