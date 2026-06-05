@@ -52,6 +52,10 @@
     neovim = {
       enable = true;
       vimAlias = true;
+
+      # explicit due to default change after current stateVersion
+      withPython3 = false;
+      withRuby = false;
     };
 
     pay-respects = {

@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-stable,
   ...
 }:
 {
@@ -9,7 +10,9 @@
     bat
     bc
     # bitwarden-cli
-    bitwarden-desktop
+    # TODO: Move back to unstable once nixpkgs#523142 (compiler-rt darwin fix) is merged
+    # TODO: Re-enable after https://github.com/bitwarden/clients/pull/20448 closes (bitwarden electron upgrade)
+    # pkgs-stable.bitwarden-desktop
     darwin.xcode_16
     discordo
     claude-code
@@ -47,13 +50,13 @@
     sketchybar-app-font
     speedtest-cli
     tailscale
-    telegram-desktop
+    # TODO: Move back to unstable once nixpkgs#523142 (compiler-rt darwin fix) is merged
+    pkgs-stable.telegram-desktop
     tmux
     tmuxPlugins.tokyo-night-tmux
     tmuxPlugins.yank
     ttyper
     vscodium
-    watchman
     zed-editor
     zsh
     zsh-powerlevel10k

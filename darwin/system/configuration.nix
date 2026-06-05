@@ -37,6 +37,11 @@
         name = "balenaetcher";
         greedy = true;
       }
+      # included until https://github.com/bitwarden/clients/pull/20448 closes (bitwarden updates electron version)
+      {
+        name = "bitwarden";
+        greedy = true;
+      }
       {
         name = "figma";
         greedy = true;
