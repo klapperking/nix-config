@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-stable,
   ...
 }:
 {
@@ -18,6 +17,7 @@
     claude-code
     discord
     docker
+    # TODO: Re-enable and test if profiles are working for devedition again
     # firefox-devedition
     fzf
     fx
@@ -50,8 +50,7 @@
     sketchybar-app-font
     speedtest-cli
     tailscale
-    # TODO: Move back to unstable once nixpkgs#523142 (compiler-rt darwin fix) is merged
-    pkgs-stable.telegram-desktop
+    telegram-desktop
     tmux
     tmuxPlugins.tokyo-night-tmux
     tmuxPlugins.yank

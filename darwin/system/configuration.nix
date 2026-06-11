@@ -61,6 +61,10 @@
         };
       }
       {
+        name = "kitlangton-hex";
+        greedy = true;
+      }
+      {
         name = "google-drive";
         greedy = true;
         args = {
@@ -72,7 +76,7 @@
         greedy = true;
       }
       {
-        name = "linear-linear";
+        name = "linear";
         greedy = true;
       }
       {
