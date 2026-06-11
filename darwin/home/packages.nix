@@ -39,6 +39,7 @@
     obsidian
     opencode
     osu-lazer-bin
+    pi-coding-agent
     pinentry-tty
     postman
     prismlauncher
