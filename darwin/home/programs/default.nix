@@ -6,6 +6,7 @@
   imports = [
     ./firefox.nix
     ./git.nix
+    ./ghostty.nix
     ./kitty.nix
     ./mpv.nix
     ./tmux.nix
