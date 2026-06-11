@@ -5,46 +5,8 @@
 {
   programs.kitty = {
     enable = true;
+    themeFile = "tokyo_night_night";
     extraConfig = ''
-      # fake tokyo night style theme
-      background #222436
-      foreground #c8d3f5
-      selection_background #2d3f76
-      selection_foreground #c8d3f5
-      url_color #4fd6be
-      cursor #c8d3f5
-      cursor_text_color #222436
-
-      active_tab_background #82aaff
-      active_tab_foreground #1e2030
-      inactive_tab_background #2f334d
-      inactive_tab_foreground #545c7e
-      tab_bar_background #1b1d2b
-
-      active_border_color #82aaff
-      inactive_border_color #2f334d
-
-      color0 #1b1d2b
-      color1 #ff757f
-      color2 #c3e88d
-      color3 #ffc777
-      color4 #82aaff
-      color5 #c099ff
-      color6 #86e1fc
-      color7 #828bb8
-
-      color8 #444a73
-      color9 #ff757f
-      color10 #c3e88d
-      color11 #ffc777
-      color12 #82aaff
-      color13 #c099ff
-      color14 #86e1fc
-      color15 #c8d3f5
-
-      color16 #ff966c
-      color17 #c53b53
-
       # Nerd Fonts v3.2.0
       symbol_map U+e000-U+e00a,U+ea60-U+ebeb,U+e0a0-U+e0c8,U+e0ca,U+e0cc-U+e0d7,U+e200-U+e2a9,U+e300-U+e3e3,U+e5fa-U+e6b1,U+e700-U+e7c5,U+ed00-U+efc1,U+f000-U+f2ff,U+f000-U+f2e0,U+f300-U+f372,U+f400-U+f533,U+f0001-U+f1af0 Symbols Nerd Font Mono
     '';
