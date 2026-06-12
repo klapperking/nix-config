@@ -187,7 +187,7 @@
           window_shadow = "float";
           window_topmost = "off";
 
-          external_bar = "all:40:0";
+          external_bar = "all:34:0";
 
           top_padding = gap_top;
           bottom_padding = gap_bottom;

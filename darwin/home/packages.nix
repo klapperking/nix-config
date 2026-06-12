@@ -48,7 +48,6 @@
     raycast
     sbarlua
     shellcheck
-    sketchybar-app-font
     speedtest-cli
     tailscale
     telegram-desktop
