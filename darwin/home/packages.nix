@@ -14,7 +14,7 @@
     # pkgs-stable.bitwarden-desktop
     darwin.xcode_16
     discordo
-    claude-code
+    dive
     discord
     docker
     # TODO: Re-enable and test if profiles are working for devedition again
@@ -39,6 +39,8 @@
     obsidian
     opencode
     osu-lazer-bin
+    oxker
+    procs
     pi-coding-agent
     pinentry-tty
     postman
