@@ -136,7 +136,22 @@
           "toolkit.telemetry.reportingpolicy.firstRun" = false;
           "toolkit.telemetry.shutdownPingSender.enabledFirstsession" = false;
           "browser.vpn_promo.enabled" = false;
+
+          # enable userChrome.css customisation
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
+          # default fonts (only apply when sites don't specify their own)
+          "font.name.monospace.x-western" = "JetBrainsMono Nerd Font";
+          "font.name.sans-serif.x-western" = "JetBrainsMono Nerd Font";
+          "font.name.serif.x-western" = "JetBrainsMono Nerd Font";
         };
+
+        userChrome = ''
+          * {
+            font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", monospace !important;
+            font-variant-ligatures: none !important;
+          }
+        '';
 
         search = {
           force = true;

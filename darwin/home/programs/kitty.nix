@@ -12,11 +12,12 @@
     '';
 
     font = {
-      name = "MesloLGS NF";
-      package = pkgs.meslo-lgs-nf;
+      name = "JetBrainsMono Nerd Font";
+      package = pkgs.nerd-fonts.jetbrains-mono;
       size = 11;
     };
     settings = {
+      disable_ligatures = "always";
       hide_window_decorations = "titlebar-only";
       window_margin_width = 4;
       placement_strategy = "center";

@@ -30,7 +30,7 @@
     google-cloud-sdk
     hyperfine
     kitty
-    meslo-lgs-nf
+    nerd-fonts.jetbrains-mono
     mqttui
     mutt
     nixd

@@ -5,8 +5,8 @@ return {
   icons = "NerdFont",
 
   font = {
-    text = "MesloLGS NF",
-    numbers = "MesloLGS NF",
+    text = "JetBrainsMonoNL Nerd Font",
+    numbers = "JetBrainsMonoNL Nerd Font",
     style_map = {
       ["Regular"] = "Regular",
       ["Semibold"] = "Bold",
