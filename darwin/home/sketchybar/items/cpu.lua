@@ -10,6 +10,7 @@ end)
 
 local cpu = sbar.add("item", "cpu", {
   position = "right",
+  width = 62,
   update_freq = 3,
   icon = {
     string = icons.cpu,

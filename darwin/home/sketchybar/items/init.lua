@@ -1,7 +1,10 @@
 require("items.launcher")
 require("items.spaces")
-require("items.cpu")
-require("items.network")
+-- Right side: first required = rightmost on screen
+-- Visual left-to-right: CPU, network, battery, volume, wifi, clock
+require("items.clock")
+require("items.wifi")
 require("items.volume")
 require("items.battery")
-require("items.clock")
+require("items.network")
+require("items.cpu")

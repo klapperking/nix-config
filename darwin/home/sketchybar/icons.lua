@@ -19,11 +19,17 @@ local icons = {
       _0       = "􀛪",
       charging = "􀢋",
     },
-    network = {
-      up   = "　↑",
-      down = "　↓",
+    wifi = {
+      strength_4 = "􀙇",
+      strength_3 = "􀙇",
+      strength_2 = "􀙇",
+      strength_1 = "􀙇",
+      off        = "􀙈",
     },
-    clock = "􀐫",
+    network = {
+      up   = "↑",
+      down = "↓",
+    },
     space = {
       focused = "●",
       normal  = "○",
@@ -32,13 +38,13 @@ local icons = {
 
   nerdfont = {
     apple    = "\u{F179}",
-    cpu      = "\u{E266}",
+    cpu      = "\u{F2DB}",
     volume = {
       _100 = "\u{F028}",
       _66  = "\u{F027}",
       _33  = "\u{F027}",
       _10  = "\u{F026}",
-      _0   = "\u{F6A9}",
+      _0   = "\u{F026}",
     },
     battery = {
       _100     = "\u{F240}",
@@ -48,11 +54,17 @@ local icons = {
       _0       = "\u{F244}",
       charging = "\u{F0E7}",
     },
+    wifi = {
+      strength_4 = "\u{F0928}",
+      strength_3 = "\u{F0925}",
+      strength_2 = "\u{F0922}",
+      strength_1 = "\u{F091F}",
+      off        = "\u{F092E}",
+    },
     network = {
       up   = "↑",
       down = "↓",
     },
-    clock    = "\u{F017}",
     space = {
       focused = "●",
       normal  = "○",

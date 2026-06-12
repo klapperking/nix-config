@@ -8,16 +8,17 @@ local prev_rx = 0
 
 local function format_bytes(bytes)
   if bytes < 1000 then
-    return string.format("%dB", bytes)
+    return string.format("%4dB", bytes)
   elseif bytes < 1000000 then
-    return string.format("%.0fK", bytes / 1000)
+    return string.format("%4dK", math.floor(bytes / 1000))
   else
-    return string.format("%.1fM", bytes / 1000000)
+    return string.format("%4.1fM", bytes / 1000000)
   end
 end
 
 local network = sbar.add("item", "network", {
   position = "right",
+  width = 120,
   update_freq = 2,
   icon = { drawing = false },
   label = {
@@ -27,7 +28,7 @@ local network = sbar.add("item", "network", {
       size = 12.0,
     },
     color = colors.white,
-    string = icons.network.up .. "0B " .. icons.network.down .. "0B",
+    string = icons.network.up .. "   0B " .. icons.network.down .. "   0B",
   },
 })
 

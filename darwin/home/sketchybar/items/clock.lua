@@ -1,19 +1,17 @@
 local colors = require("colors")
 local settings = require("settings")
-local icons = require("icons")
 
 local clock = sbar.add("item", "clock", {
   position = "right",
+  width = 135,
   update_freq = 30,
   icon = {
-    string = icons.clock,
     font = {
       family = settings.font.text,
       style = settings.font.style_map["Regular"],
       size = 13.0,
     },
     color = colors.grey,
-    padding_right = 2,
   },
   label = {
     font = {
@@ -23,6 +21,7 @@ local clock = sbar.add("item", "clock", {
     },
     color = colors.white,
   },
+  click_script = "open -a Calendar",
 })
 
 clock:subscribe({ "routine", "forced" }, function(env)

@@ -4,6 +4,8 @@ local icons = require("icons")
 
 local volume = sbar.add("item", "volume", {
   position = "right",
+  width = 30,
+  update_freq = 5,
   icon = {
     string = icons.volume._66,
     font = {
@@ -16,25 +18,34 @@ local volume = sbar.add("item", "volume", {
   label = { drawing = false },
 })
 
-local function update_volume(env)
-  local level = tonumber(env.INFO) or 0
-  local icon
-
+local function icon_for_level(level)
   if level == 0 then
-    icon = icons.volume._0
+    return icons.volume._0
   elseif level < 10 then
-    icon = icons.volume._10
+    return icons.volume._10
   elseif level < 40 then
-    icon = icons.volume._33
+    return icons.volume._33
   elseif level < 70 then
-    icon = icons.volume._66
+    return icons.volume._66
   else
-    icon = icons.volume._100
+    return icons.volume._100
   end
-
-  volume:set({
-    icon = { string = icon },
-  })
 end
 
-volume:subscribe("volume_change", update_volume)
+local function poll_volume()
+  sbar.exec("osascript -e 'output volume of (get volume settings)'", function(result)
+    local level = tonumber(result)
+    if level then
+      volume:set({ icon = { string = icon_for_level(level) } })
+    end
+  end)
+end
+
+volume:subscribe("volume_change", function(env)
+  local level = tonumber(env.INFO) or 0
+  volume:set({ icon = { string = icon_for_level(level) } })
+end)
+
+volume:subscribe({ "routine", "forced" }, function(env)
+  poll_volume()
+end)
