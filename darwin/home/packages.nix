@@ -12,6 +12,7 @@
     # TODO: Move back to unstable once nixpkgs#523142 (compiler-rt darwin fix) is merged
     # TODO: Re-enable after https://github.com/bitwarden/clients/pull/20448 closes (bitwarden electron upgrade)
     # pkgs-stable.bitwarden-desktop
+    colima
     darwin.xcode_16
     discordo
     dive
@@ -39,7 +40,6 @@
     obsidian
     opencode
     osu-lazer-bin
-    oxker
     procs
     pi-coding-agent
     pinentry-tty
