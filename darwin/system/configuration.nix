@@ -11,10 +11,10 @@
     # symlink system packages to home manager zsh for completion access
     pathsToLink = [ "/share/zsh/" ];
     systemPackages = with pkgs; [
-      sbarlua
-      vim
       devenv
       keepassxc
+      nh
+      vim
     ];
   };
 
