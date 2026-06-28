@@ -30,10 +30,6 @@
     };
     casks = [
       {
-        name = "1password";
-        greedy = true;
-      }
-      {
         name = "balenaetcher";
         greedy = true;
       }
@@ -145,6 +141,14 @@
 
   programs = {
     zsh = {
+      enable = true;
+    };
+
+    _1password = {
+      enable = true;
+    };
+
+    _1password-gui = {
       enable = true;
     };
   };
