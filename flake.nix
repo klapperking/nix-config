@@ -109,5 +109,48 @@
           ];
         };
       };
+
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt;
+
+      nixosConfigurations = {
+        "linux" = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = {
+            pkgs-stable = import nixpkgs-stable-2511 {
+              inherit system;
+              config.allowUnfree = true;
+            };
+          };
+          modules = [
+            ./nixos/system/configuration.nix
+            ./nixos/hosts/linux.nix
+            inputs.sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
+            {
+              nixpkgs.overlays = [
+                inputs.nur.overlays.default
+              ];
+              home-manager = {
+                extraSpecialArgs = {
+                  inherit (specialArgs) pkgs-stable;
+                };
+
+                sharedModules = [
+                  inputs.sops-nix.homeManagerModules.sops
+                ];
+
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.martin = {
+                  imports = [
+                    ./nixos/home/home.nix
+                  ];
+                };
+                backupFileExtension = "backup";
+              };
+            }
+          ];
+        };
+      };
     };
 }
