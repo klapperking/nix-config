@@ -1,12 +1,15 @@
 {
+  lib,
   pkgs,
   config,
   ...
 }:
 {
   home.sessionVariables = {
-    TERMINAL = "kitty";
-    EDITOR = "zeditor";
+    # mkDefault so per-platform modules can override (e.g. NixOS sets
+    # EDITOR=nvim via programs.neovim.defaultEditor; darwin keeps zeditor).
+    TERMINAL = lib.mkDefault "kitty";
+    EDITOR = lib.mkDefault "zeditor";
     # use fake omz cache dir for completions
     ZSH_CACHE_DIR = "${config.home.homeDirectory}/.cache/oh-my-zsh";
   };
