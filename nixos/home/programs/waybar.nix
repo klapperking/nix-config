@@ -14,9 +14,15 @@ in
         height = 26;
         spacing = 8;
 
-        modules-left = [ "hyprland/workspaces" ];
+        modules-left = [
+          "custom/omarchy-menu"
+          "hyprland/workspaces"
+        ];
         modules-center = [ "hyprland/window" ];
         modules-right = [
+          "custom/screen-recording"
+          "custom/idle"
+          "custom/dnd"
           "network"
           "bluetooth"
           "pulseaudio"
@@ -26,6 +32,42 @@ in
           "tray"
           "clock"
         ];
+
+        # === Omarchy-specific custom modules ===
+        "custom/omarchy-menu" = {
+          format = "";
+          tooltip = false;
+          on-click = "omarchy-menu";
+        };
+
+        "custom/screen-recording" = {
+          # Written by omarchy-capture-screenrecording. Refreshed on SIGRTMIN+8.
+          exec = "test -f \"$HOME/.local/state/omarchy/screen-recording.pid\" && printf '⏺' || printf ''";
+          format = "{}";
+          signal = 8;
+          interval = 30;
+          on-click = "omarchy-capture-screenrecording";
+        };
+
+        "custom/idle" = {
+          # Shows an icon when hypridle is DISABLED (i.e. no idle lock).
+          exec = "systemctl --user is-active --quiet hypridle && printf '' || printf '☀'";
+          format = "{}";
+          signal = 9;
+          interval = 30;
+          on-click = "omarchy-toggle-idle";
+          tooltip-format = "Idle lock toggle";
+        };
+
+        "custom/dnd" = {
+          # Do-not-disturb indicator, refreshed on SIGRTMIN+10.
+          exec = "makoctl mode | grep -q do-not-disturb && printf '🔕' || printf ''";
+          format = "{}";
+          signal = 10;
+          interval = 30;
+          on-click = "makoctl mode -t do-not-disturb";
+          tooltip-format = "Do not disturb toggle";
+        };
 
         "hyprland/workspaces" = {
           format = "{icon}";
@@ -166,6 +208,34 @@ in
 
       #battery.critical {
         color: ${theme.colors.red};
+      }
+
+      #custom-omarchy-menu {
+        background: ${theme.colors.accent};
+        color: ${theme.colors.bg};
+        padding: 0 12px;
+        margin: 4px 6px 4px 4px;
+        border-radius: 4px;
+        font-weight: bold;
+      }
+
+      #custom-omarchy-menu:hover {
+        background: ${theme.colors.magenta};
+      }
+
+      #custom-screen-recording {
+        color: ${theme.colors.red};
+        padding: 0 8px;
+      }
+
+      #custom-idle {
+        color: ${theme.colors.yellow};
+        padding: 0 8px;
+      }
+
+      #custom-dnd {
+        color: ${theme.colors.magenta};
+        padding: 0 8px;
       }
     '';
   };

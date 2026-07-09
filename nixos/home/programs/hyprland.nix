@@ -11,7 +11,7 @@ in
     settings = {
       "$mod" = "SUPER";
       "$terminal" = "alacritty";
-      "$browser" = "chromium";
+      "$browser" = "omarchy-launch-browser";
       "$fileManager" = "nautilus";
       "$editor" = "alacritty -e nvim";
       "$menu" = "walker";
@@ -84,7 +84,7 @@ in
         "$mod ALT, Return, exec, $terminal -e tmux"
         "$mod SHIFT, Return, exec, $browser"
         "$mod SHIFT, B, exec, $browser"
-        "$mod SHIFT ALT, B, exec, $browser --incognito"
+        "$mod SHIFT ALT, B, exec, $browser --private"
         "$mod SHIFT, F, exec, $fileManager"
         "$mod SHIFT, N, exec, $editor"
         "$mod SHIFT, M, exec, spotify"
@@ -93,10 +93,16 @@ in
 
         # Launcher / menu
         "$mod, SPACE, exec, $menu"
-        # TODO Phase 2b:
-        #   "$mod ALT, SPACE, exec, omarchy-menu"
-        #   "$mod CTRL, E, exec, omarchy-menu emoji"
-        #   "$mod CTRL, C, exec, omarchy-menu capture"
+        "$mod ALT, SPACE, exec, omarchy-menu"
+        "$mod, ESCAPE, exec, omarchy-menu system"
+        "$mod CTRL, C, exec, omarchy-menu capture"
+        "$mod CTRL, O, exec, omarchy-menu toggle"
+        "$mod CTRL, H, exec, omarchy-menu hardware"
+        "$mod, K, exec, omarchy-menu learn"
+
+        # Toggles
+        "$mod CTRL, I, exec, omarchy-toggle-idle"
+        "$mod CTRL, N, exec, omarchy-toggle-nightlight"
 
         # Window management
         "$mod, W, killactive,"
@@ -155,17 +161,30 @@ in
         # Waybar toggle
         "$mod SHIFT, SPACE, exec, pkill -SIGUSR1 waybar"
 
-        # Screenshots — Phase 2a inline; Phase 2b wraps in omarchy-capture-*
-        '', Print, exec, grim -g "$(slurp)" - | wl-copy''
-        ", ALT_L, Print, exec, gpu-screen-recorder -w screen -o /tmp/rec.mp4"
+        # Screenshots / capture (Omarchy-parity)
+        ", Print, exec, omarchy-capture-screenshot"
+        "ALT, Print, exec, omarchy-capture-screenrecording"
         "$mod, Print, exec, hyprpicker -a"
-        # TODO Phase 2b: OCR via omarchy-capture-text-extraction
+        "$mod CTRL, Print, exec, omarchy-capture-text-extraction"
 
         # Lock
         "$mod CTRL, L, exec, hyprlock"
 
         # Walker clipboard mode
         "$mod CTRL, V, exec, walker -m clipboardmanager"
+
+        # Web apps (Omarchy defaults — Chromium --app= launchers)
+        "$mod SHIFT, A, exec, chromium --app=https://chatgpt.com"
+        "$mod SHIFT ALT, A, exec, chromium --app=https://grok.com"
+        "$mod SHIFT, C, exec, chromium --app=https://calendar.google.com"
+        "$mod SHIFT, E, exec, chromium --app=https://app.hey.com"
+        "$mod SHIFT, Y, exec, chromium --app=https://youtube.com"
+        "$mod SHIFT ALT, G, exec, chromium --app=https://web.whatsapp.com"
+        "$mod SHIFT CTRL, G, exec, chromium --app=https://messages.google.com/web"
+        "$mod SHIFT, P, exec, chromium --app=https://photos.google.com"
+        "$mod SHIFT, S, exec, chromium --app=https://maps.google.com"
+        "$mod SHIFT, X, exec, chromium --app=https://x.com"
+        "$mod SHIFT ALT, X, exec, chromium --app=https://x.com/compose/post"
       ];
 
       # Mouse binds
@@ -174,16 +193,23 @@ in
         "$mod, mouse:273, resizewindow"
       ];
 
-      # Media (repeat-on-hold)
+      # Media (repeat-on-hold). swayosd-client both changes the value AND
+      # shows an on-screen indicator; brightness scripts wrap that.
       bindel = [
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
-        ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
-        ", XF86KbdBrightnessUp, exec, brightnessctl -d '*::kbd_backlight' set +10%"
-        ", XF86KbdBrightnessDown, exec, brightnessctl -d '*::kbd_backlight' set 10%-"
+        # Volume
+        ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise --max-volume 100"
+        ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"
+        ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+        ", XF86AudioMicMute, exec, omarchy-audio-input-mute"
+
+        # Brightness
+        ", XF86MonBrightnessUp, exec, omarchy-brightness-display up"
+        ", XF86MonBrightnessDown, exec, omarchy-brightness-display down"
+        ", XF86KbdBrightnessUp, exec, omarchy-brightness-keyboard up"
+        ", XF86KbdBrightnessDown, exec, omarchy-brightness-keyboard down"
+
+        # Omarchy default: Super+XF86AudioMute cycles output sink
+        "$mod, XF86AudioMute, exec, omarchy-audio-output-switch"
       ];
 
       # Media (fires even when locked)

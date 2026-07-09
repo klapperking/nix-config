@@ -4,6 +4,8 @@
     ./packages.nix
     ./programs
     ./services
+    ./scripts
+    ./webapps
     ../../shared/home/programs
     ../../shared/home/services
   ];
