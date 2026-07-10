@@ -1,0 +1,63 @@
+# SOPS recipient policy for this flake.
+#
+# See ~/Downloads/security-hardened-secrets-runbook(1).md §Phase 3 for the full model:
+#   - host/local activation key (per-host)  → decrypts on rebuild, no hardware ceremony
+#   - YubiKey PIV/age recipients            → decrypt when a human edits
+#   - offline recovery identity             → paper/USB fallback
+#
+# Bootstrap (one-time per host, one-time for YubiKeys):
+#   1. Provision YubiKeys per Phase 0; generate age-plugin-yubikey identities:
+#        age-plugin-yubikey --generate --name sops-edit \
+#          --pin-policy once --touch-policy always
+#      Paste the printed `age1yubikey1...` recipients into the anchors below.
+#   2. Generate the offline recovery identity: `age-keygen`; store the private
+#      key on paper/USB; paste the public recipient into `&recovery`.
+#   3. macOS: run once on mb-pro to seed the local activation key:
+#        sudo install -d -m 0700 /var/lib/sops-nix
+#        sudo age-keygen -o /var/lib/sops-nix/age-key.txt
+#        sudo chmod 0600 /var/lib/sops-nix/age-key.txt
+#      Paste the public recipient into `&mb_pro`.
+#   4. NixOS: after first install and OpenSSH host key generation, run on the target:
+#        ssh-to-age < /etc/ssh/ssh_host_ed25519_key.pub
+#      Paste the returned recipient into `&linux`.
+#
+# Until the anchors below have real values, this file is a scaffold — do NOT
+# commit encrypted secrets against these placeholder recipients or you will
+# lose the ability to decrypt them.
+
+keys:
+  - &yk_keychain   age1yubikey1PLACEHOLDER_KEYCHAIN
+  - &yk_home       age1yubikey1PLACEHOLDER_HOME
+  - &yk_cold       age1yubikey1PLACEHOLDER_COLD_SPARE
+  - &recovery      age1PLACEHOLDER_OFFLINE_RECOVERY
+  - &mb_pro        age1PLACEHOLDER_MB_PRO_LOCAL
+  - &linux         age1PLACEHOLDER_LINUX_HOST
+
+creation_rules:
+  - path_regex: secrets/common\.yaml$
+    key_groups:
+      - age:
+          - *yk_keychain
+          - *yk_home
+          - *yk_cold
+          - *recovery
+          - *mb_pro
+          - *linux
+
+  - path_regex: secrets/hosts/mb-pro\.yaml$
+    key_groups:
+      - age:
+          - *yk_keychain
+          - *yk_home
+          - *yk_cold
+          - *recovery
+          - *mb_pro
+
+  - path_regex: secrets/hosts/linux\.yaml$
+    key_groups:
+      - age:
+          - *yk_keychain
+          - *yk_home
+          - *yk_cold
+          - *recovery
+          - *linux
