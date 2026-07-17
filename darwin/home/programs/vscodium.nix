@@ -87,13 +87,13 @@
               name = "sqltools";
               publisher = "mtxr";
               version = "latest";
-              sha256 = "sha256-2JgBRMaNU3einOZ0POfcc887HCScu6myETTLoJMS6o8=";
+              sha256 = "sha256-SpVFH+Qf9tpnNm4J5z3fOhWzzYP0LknDNm88JHMxkIU=";
             }
             {
               name = "rust-analyzer";
               publisher = "rust-lang";
               version = "latest";
-              sha256 = "sha256-h+HCvXqAbd0MLPYw/8G3dRApNEoulVFw+fe3LXs6ZbQ=";
+              sha256 = "sha256-G0kG7jaDCOg0mk4c9WKITPwSAQOgllsZ40QLeEXc/Hw=";
             }
             {
               name = "oxc-vscode";
@@ -105,13 +105,13 @@
               name = "python";
               publisher = "ms-python";
               version = "latest";
-              sha256 = "sha256-dePjMDC+H/ADyiaIb01C9XQCjdbsWSRoLzdenwi7koA=";
+              sha256 = "sha256-ft9F6Ok/0VU3P9+AAAxW51NE5RlEK6VwtFPaMYq+GLg=";
             }
             {
               name = "debugpy";
               publisher = "ms-python";
               version = "latest";
-              sha256 = "sha256-8627ebv5B/173Q5JLM7eROj5pnyuxe2OG1TaIfDF2xg=";
+              sha256 = "sha256-fG4HozhdkB7N1c2SVr8mfs99F5np97+Lz102x7NgtY0=";
             }
             {
               name = "playwright";

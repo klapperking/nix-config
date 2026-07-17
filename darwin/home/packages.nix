@@ -5,12 +5,18 @@
 {
   home.packages = with pkgs; [
     age
+    ast-grep
     bat
     bc
+    bun
     # bitwarden-cli
     # TODO: Move back to unstable once nixpkgs#523142 (compiler-rt darwin fix) is merged
     # TODO: Re-enable after https://github.com/bitwarden/clients/pull/20448 closes (bitwarden electron upgrade)
     # pkgs-stable.bitwarden-desktop
+    # ! Include codex and claude so codexbar can find their configurations
+    claude-code
+    codex
+    codexbar
     colima
     darwin.xcode_16
     discordo
@@ -36,6 +42,7 @@
     nixd
     nixfmt
     nmap
+    nodejs_22
     obsidian
     opencode
     osu-lazer-bin

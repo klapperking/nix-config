@@ -12,7 +12,7 @@
     pathsToLink = [ "/share/zsh/" ];
     systemPackages = with pkgs; [
       devenv
-      keepassxc
+      # keepassxc
       nh
       vim
     ];
