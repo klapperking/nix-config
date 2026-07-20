@@ -11,6 +11,9 @@
       # Allow x-keys (like C-left to move by full word)
       set-option -g xterm-keys on
 
+      # extended keys for navigation in interactive tui applications
+      set -g extended-keys on
+
       # use vi key in copy mode
       setw -g mode-keys vi
 
