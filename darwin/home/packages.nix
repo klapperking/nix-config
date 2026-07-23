@@ -18,7 +18,6 @@
     codex
     codexbar
     colima
-    darwin.xcode_16
     discordo
     dive
     discord

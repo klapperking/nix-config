@@ -11,6 +11,7 @@
     # symlink system packages to home manager zsh for completion access
     pathsToLink = [ "/share/zsh/" ];
     systemPackages = with pkgs; [
+      darwin.xcode_26_5_Apple_silicon
       devenv
       # keepassxc
       nh
