@@ -77,6 +77,14 @@ config for this is very much taken from https://github.com/FelixKratz - amazing 
 ### Homebrew Applications
 - whatever is not available on nixpkgs for darwin (or has macOS such as screen share permissions)
 
+## Utilities
+
+### oss-ref — OSS Reference Manager
+
+`oss-ref` clones versioned OSS repositories into a shared references root and symlinks them into consumer projects. A weekly launchd agent prunes orphaned references automatically. See [`skills/oss-reference/SKILL.md`](skills/oss-reference/SKILL.md) for full documentation.
+
+Key environment variables: `OSS_REFERENCES_ROOT` (default: `~/code/others/oss-references`) and `OSS_REFERENCES_CONSUMER_ROOTS` (default: `~/code`).
+
 ## TODO List
 
 1. **Security**

@@ -9,6 +9,7 @@
     ./ghostty.nix
     ./kitty.nix
     ./mpv.nix
+    ./oss-references.nix
     ./tmux.nix
     ./vscodium.nix
     ./zsh.nix
@@ -57,6 +58,10 @@
       # explicit due to default change after current stateVersion
       withPython3 = false;
       withRuby = false;
+    };
+
+    oss-references = {
+      enable = true;
     };
 
     pay-respects = {
