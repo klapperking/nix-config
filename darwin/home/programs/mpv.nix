@@ -1,10 +1,42 @@
 # taken from gvolpe: https://github.com/gvolpe/nix-config/blob/cac3d57ee34bc1cfd368f7848717c5c17071c8d6/home/programs/mpv/default.nix
 { pkgs, ... }:
 
+let
+  # ff2mpv firefox extension native client — wiring differs by platform, see
+  # `home.file` below for the system-dependent bits.
+  #
+  # The native-messaging host manifest location is system-dependent:
+  #   - macOS: ~/Library/Application Support/Mozilla/NativeMessagingHosts/
+  #   - Linux: ~/.mozilla/native-messaging-hosts/
+  # Firefox only scans one directory per OS; a manifest located elsewhere is
+  # silently ignored, which previously made the "Play in mpv" button do nothing
+  # even though the manifest was on disk.
+  #
+  # On macOS, GUI applications inherit PATH from launchd (no Nix profile dirs),
+  # so the upstream ff2mpv.py can't find `mpv` on its own. The wrapper below
+  # prepends the per-user Nix profile dir before exec'ing the upstream script.
+  ff2mpvLauncher = pkgs.writeShellScriptBin "ff2mpv-launcher" ''
+    export PATH="/etc/profiles/per-user/$(id -un)/bin:$PATH"
+    exec "${pkgs.ff2mpv}/bin/ff2mpv.py" "$@"
+  '';
+in
 {
-  # ff2mpv firefox extension native client
-  home.file.".mozilla/native-messaging-hosts/ff2mpv.json".source =
-    "${pkgs.ff2mpv}/lib/mozilla/native-messaging-hosts/ff2mpv.json";
+  home.file =
+    if pkgs.stdenv.isDarwin then {
+      # macOS: Firefox only scans this NativeMessagingHosts dir, NOT ~/.mozilla/.
+      "Library/Application Support/Mozilla/NativeMessagingHosts/ff2mpv.json".text =
+        builtins.toJSON {
+          name = "ff2mpv";
+          description = "ff2mpv's external manifest";
+          path = "${ff2mpvLauncher}/bin/ff2mpv-launcher";
+          type = "stdio";
+          allowed_extensions = [ "ff2mpv@yossarian.net" ];
+        };
+    } else {
+      # Linux: ~/.mozilla/native-messaging-hosts/ — what FF scans on Linux.
+      ".mozilla/native-messaging-hosts/ff2mpv.json".source =
+        "${pkgs.ff2mpv}/lib/mozilla/native-messaging-hosts/ff2mpv.json";
+    };
 
   programs.mpv = {
     enable = true;
