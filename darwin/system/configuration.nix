@@ -88,10 +88,6 @@
         };
       }
       {
-        name = "orbstack";
-        greedy = true;
-      }
-      {
         name = "raspberry-pi-imager";
         greedy = true;
       }
