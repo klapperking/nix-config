@@ -85,6 +85,12 @@
             {
               nixpkgs.overlays = [
                 inputs.nur.overlays.default
+                # FIXME: obsidian macOS dmg nests in <version>-universal/ now, drop in a bit (pr merged) https://github.com/NixOS/nixpkgs/pull/548462
+                (final: prev: {
+                  obsidian = prev.obsidian.overrideAttrs (old: {
+                    sourceRoot = "${old.appname} ${old.version}-universal/${old.appname}.app";
+                  });
+                })
               ];
               home-manager = {
                 extraSpecialArgs = {
