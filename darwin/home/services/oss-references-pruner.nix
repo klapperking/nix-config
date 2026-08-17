@@ -24,7 +24,7 @@ in
     # TODO(linux): expose a systemd.user.timers equivalent when pkgs.stdenv.isLinux
   };
 
-  config = lib.mkIf (cfg.enable && pkgs.stdenv.isDarwin) {
+  config = lib.mkIf (cfg.enable && pkgs.stdenv.hostPlatform.isDarwin) {
     assertions = [
       {
         assertion = base.enable;

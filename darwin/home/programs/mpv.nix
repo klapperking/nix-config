@@ -22,7 +22,7 @@ let
 in
 {
   home.file =
-    if pkgs.stdenv.isDarwin then {
+    if pkgs.stdenv.hostPlatform.isDarwin then {
       # macOS: Firefox only scans this NativeMessagingHosts dir, NOT ~/.mozilla/.
       "Library/Application Support/Mozilla/NativeMessagingHosts/ff2mpv.json".text =
         builtins.toJSON {

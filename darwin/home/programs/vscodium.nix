@@ -93,7 +93,7 @@
               name = "rust-analyzer";
               publisher = "rust-lang";
               version = "latest";
-              sha256 = "sha256-l9/jHaLcL+77KN6gsQXzXqRlAfxOGPHo5uA1oHDEbYA=";
+              sha256 = "sha256-UVjsTSanzD/x6B5pBsYnYuspvjubqwEx1hkfnHg0uxI=";
             }
             {
               name = "oxc-vscode";
@@ -105,13 +105,13 @@
               name = "python";
               publisher = "ms-python";
               version = "latest";
-              sha256 = "sha256-ft9F6Ok/0VU3P9+AAAxW51NE5RlEK6VwtFPaMYq+GLg=";
+              sha256 = "sha256-Y5tMdJM00ZlXUcKpEr9xiQrPNZmugXMWAb+Zf2U76UY=";
             }
             {
               name = "debugpy";
               publisher = "ms-python";
               version = "latest";
-              sha256 = "sha256-6J5+zO2gRAnCmzSX/qcWpHbCB7TQ05TDXrOWGsxiOAc=";
+              sha256 = "sha256-U9sS0m5ADo0+AmjcHunWJr9x+JZepXKjqTc8C3nvoGk=";
             }
             {
               name = "playwright";
